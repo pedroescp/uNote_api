@@ -5,6 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using uNotes.Infra.CrossCutting.IoC;
+using uNotes.Api.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using uNotes.Infra.CrossCutting.Constantes;
 
 namespace uNotes.Api
 {
@@ -21,12 +26,39 @@ namespace uNotes.Api
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             services.RegisterServices(Configuration.GetConnectionString("DefaultConnection"));
             services.AddControllers();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = "uNotes.Api.Security.Bearer",
+                    ValidAudience = "uNotes.Api.Security.Bearer",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.Default.GetBytes(ConstantesSistema.Seguranca.SymmetricSecurityKey))
+                };
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context =>
+                    {
+                        return Task.CompletedTask;
+                    }
+                };
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api - uNotes", Version = "v1" });
             });
 
             services.AddCors();
+            services.AddSwaggerConfig();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -53,6 +85,8 @@ namespace uNotes.Api
             app.UseRouting();
 
             app.UseCors("AllowSpecificOrigin");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

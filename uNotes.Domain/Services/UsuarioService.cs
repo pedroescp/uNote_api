@@ -1,6 +1,8 @@
 ﻿using uNotes.Domain.Entidades;
 using uNotes.Domain.Services.Interface.Repository;
 using uNotes.Domain.Services.Interface.Service;
+using uNotes.Infra.CrossCutting.Criptografia;
+using uNotes.Infra.CrossCutting.Enums;
 
 namespace uNotes.Domain.Services
 {
@@ -17,6 +19,17 @@ namespace uNotes.Domain.Services
             var antigoUsuario = _usuarioRepository.ObterPorId(usuario.Id);
             antigoUsuario.Atualizar(usuario);
             return;
+        }
+
+        public void AdicionarUsuario(Usuario usuario)
+        {
+            usuario.Senha = Criptografia.Encrypt(usuario.Senha, TipoCriptografia.SenhaLogin);
+            base.Adicionar(usuario);
+        }
+
+        public Usuario? ObterUsuarioPorLoginOuEmail(string login)
+        {
+            return _usuarioRepository.ObterPorEmailOuLogin(login);
         }
     }
 }

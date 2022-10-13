@@ -4,5 +4,6 @@
     {
         public const string Usuario = "Usuario";
         public const string Cargo = "Cargo";
+        public const string TokenUsuario = "TokenUsuario";
     }
 }

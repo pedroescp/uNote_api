@@ -32,6 +32,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             #region SERVICES
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ICargoService, CargoService>();
+            services.AddScoped<IAutenticacaoService, AutenticacaoService>();
             #endregion
 
             #region APPSERVICES

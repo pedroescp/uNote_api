@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using uNotes.Application.AppService;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Cargo;
@@ -9,6 +10,7 @@ namespace uNotes.Api.Controllers
 {
     [ApiController]
     [Route("cargo")]
+    [Authorize]
     public class CargoController : BaseController
     {
         private readonly ICargoAppService _cargoAppService;
