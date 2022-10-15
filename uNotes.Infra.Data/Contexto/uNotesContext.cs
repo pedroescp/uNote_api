@@ -12,7 +12,6 @@ namespace uNotes.Infra.Data.Contexto
 {
     public class uNotesContext : DbContext
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public uNotesContext(DbContextOptions<uNotesContext> options) : base(options)
         {
@@ -21,11 +20,12 @@ namespace uNotes.Infra.Data.Contexto
         public uNotesContext(DbContextOptions<uNotesContext> options, IHttpContextAccessor httpContextAccessor) :
            this(options)
         {
-            _httpContextAccessor = httpContextAccessor;
         }
 
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Cargo> Cargos { get; set; }
+        public DbSet<Usuario>? Usuarios { get; set; }
+        public DbSet<Cargo>? Cargos { get; set; }
+        public DbSet<Grupo>? Grupos { get; set; }
+        public DbSet<UsuarioGrupo>? UsuariosGrupos {get; set;}
         public uNotesContext() { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
