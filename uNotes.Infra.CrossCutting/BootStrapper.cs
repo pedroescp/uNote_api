@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PL.Application.AutoMapper;
 using uNotes.Application.AppService;
 using uNotes.Application.AppService.Interface;
+using uNotes.Domain.Entidades;
 using uNotes.Domain.Services;
 using uNotes.Domain.Services.Interface.Repository;
 using uNotes.Domain.Services.Interface.Service;
@@ -28,17 +29,23 @@ namespace uNotes.Infra.CrossCutting.IoC
             #region REPOSITORIES
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ICargoRepository, CargoRepository>();
+            services.AddScoped<IGrupoRepository, GrupoRepository>();
+            services.AddScoped<IUsuarioGrupoRepository, UsuarioGrupoRepository>();
             #endregion
 
             #region SERVICES
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ICargoService, CargoService>();
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
+            services.AddScoped<IGrupoService, GrupoService>();
+            services.AddScoped<IUsuarioGrupoService, UsuarioGrupoService>();
             #endregion
 
             #region APPSERVICES
             services.AddScoped<IUsuarioAppService, UsuarioAppService>();
             services.AddScoped<ICargoAppService, CargoAppService>();
+            services.AddScoped<IGrupoAppService, GrupoAppService>();
+
             #endregion
 
             services.AddDbContext<uNotesContext>(options => options.UseNpgsql(connectionString, o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
