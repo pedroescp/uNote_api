@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using uNotes.Infra.CrossCutting.Constantes;
+using uNotes.Infra.Data.Contexto;
 
 namespace uNotes.Api
 {
@@ -61,8 +62,17 @@ namespace uNotes.Api
             services.AddSwaggerConfig();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, ConfiguracoesSeed configSeed,IWebHostEnvironment env)
         {
+            try
+            {
+                configSeed.SeedData().Wait();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             
             if (env.IsDevelopment())
             {

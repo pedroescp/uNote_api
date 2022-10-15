@@ -22,6 +22,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ConfiguracoesSeed>();
 
             services.AddScoped<INotificador, Notificador>();
 
