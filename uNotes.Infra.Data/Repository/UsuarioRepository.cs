@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,13 @@ namespace uNotes.Infra.Data.Repository
     {
         public UsuarioRepository(uNotesContext context) : base(context)
         {
+        }
+
+        public Usuario? ObterPorEmailOuLogin(string usuario)
+        {
+            return DbSet
+                    .Include(x => x.Cargo)
+                    .FirstOrDefault(x => x.Email == usuario || x.Login == usuario);
         }
     }
 }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\uNotes.Application\uNotes.Application.csproj" />
     <ProjectReference Include="..\uNotes.Domain\uNotes.Domain.csproj" />
+    <ProjectReference Include="..\uNotes.Infra.CrossCutting.Constantes\uNotes.Infra.CrossCutting.Constantes.csproj" />
     <ProjectReference Include="..\uNotes.Infra.CrossCutting.RunMigrations\uNotes.Infra.CrossCutting.RunMigrations.csproj" />
     <ProjectReference Include="..\uNotes.Infra.CrossCutting\uNotes.Infra.CrossCutting.IoC.csproj" />
     <ProjectReference Include="..\uNotes.Infra.Data\uNotes.Infra.Data.csproj" />

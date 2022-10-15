@@ -11,7 +11,7 @@ namespace uNotes.Infra.CrossCutting.Notificacoes
             _notificacoes = new List<Notificacao>();
         }
 
-        public void AdicionarNotificacao(string chave,string notificacao)
+        public void AdicionarNotificacao(string notificacao)
         {
             _notificacoes.Add(new Notificacao(notificacao));
         }
@@ -35,7 +35,7 @@ namespace uNotes.Infra.CrossCutting.Notificacoes
         {
             foreach (var erro in erros)
             {
-                AdicionarNotificacao(erro.PropertyName,erro.ErrorMessage);
+                AdicionarNotificacao(erro.ErrorMessage);
             }
         }
     }

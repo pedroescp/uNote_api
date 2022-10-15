@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Usuario;
@@ -6,6 +7,7 @@ using uNotes.Infra.CrossCutting.Notificacoes;
 namespace uNotes.Api
 {
     [ApiController]
+    [Authorize]
     [Route("usuario")]
     public class UsuarioController : BaseController
     {
@@ -20,6 +22,10 @@ namespace uNotes.Api
 
         [HttpPut]
         public IActionResult Atualizar(UsuarioAtualizarRequest usuario) => CustomPutResponse(_usuarioAppService.Atualizar(usuario));
+
+        [AllowAnonymous]
+        [HttpPost("autenticar")]
+        public IActionResult Autenticar(string emailLogin, string senha) => CustomResponse(_usuarioAppService.Autenticar(emailLogin, senha));
 
         [HttpGet("obter-por-id")]
         public IActionResult ObterPorId(Guid id) => CustomPostResponse(_usuarioAppService.ObterPorId(id));
