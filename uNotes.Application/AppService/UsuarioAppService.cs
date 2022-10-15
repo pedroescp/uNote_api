@@ -25,7 +25,7 @@ namespace uNotes.Application.AppService
         {
             _usuarioService.Adicionar(_mapper.Map<Usuario>(user));
             _unitOfWork.Commit();
-            return user;
+            return user; 
         }
 
         public string Atualizar(UsuarioAtualizarRequest user)

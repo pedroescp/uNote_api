@@ -4,5 +4,7 @@
     {
         public const string Usuario = "Usuario";
         public const string Cargo = "Cargo";
+        public const string Grupo = "Grupo";
+        public const string UsuarioGrupo = "UsuarioGrupo";
     }
 }
