@@ -39,7 +39,7 @@ namespace uNotes.Application.AppService
             return user; 
         }
 
-        public LoginObterResponse? Autenticar(string emailLogin, string senha)
+        public LoginObterResponse Autenticar(string emailLogin, string senha)
         {
             var usuario = _usuarioService.ObterUsuarioPorLoginOuEmail(emailLogin);
             if (usuario is null)

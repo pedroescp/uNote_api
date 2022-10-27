@@ -1,10 +1,18 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using uNotes.Application.Requests.Cargo;
+using uNotes.Application.Requests.Documento;
 using uNotes.Application.Requests.Grupo;
+using uNotes.Application.Requests.Notes;
+using uNotes.Application.Requests.Tag;
+using uNotes.Application.Requests.TagsNotas;
 using uNotes.Application.Requests.Usuario;
 using uNotes.Application.Responses.Cargo;
+using uNotes.Application.Responses.Documento;
 using uNotes.Application.Responses.Grupo;
+using uNotes.Application.Responses.Notes;
+using uNotes.Application.Responses.Tag;
+using uNotes.Application.Responses.TagsNotas;
 using uNotes.Application.Responses.Usuario;
 using uNotes.Domain.Entidades;
 
@@ -32,7 +40,21 @@ namespace PL.Application.AutoMapper
                 // UsuarioGrupo
                 config.CreateMap<VincularUsuarioRequest, UsuarioGrupo>().ReverseMap();
 
-                
+                // Notes
+                config.CreateMap<NotesAdicionarRequest, Notes>().ReverseMap();
+                config.CreateMap<NotesAtualizarRequest, Notes>().ReverseMap();
+
+                // Documentos
+                config.CreateMap<DocumentoAdicionarRequest, Documento>().ReverseMap();
+                config.CreateMap<DocumentoAtualizarRequest, Documento>().ReverseMap();
+
+                //Tag
+                config.CreateMap<TagAdicionarRequest, Tag>().ReverseMap();
+                config.CreateMap<TagAtualizarRequest, Tag>().ReverseMap();
+
+                //TagsNotas
+                config.CreateMap<TagsNotasAdicionarRequest, TagsNotas>().ReverseMap();
+                config.CreateMap<TagsNotasAtualizarRequest, TagsNotas>().ReverseMap();
 
                 //Responses--
                 //Usuario
@@ -49,7 +71,17 @@ namespace PL.Application.AutoMapper
                 config.CreateMap<UsuarioGrupoResponse, UsuarioGrupo>().ReverseMap()
                     .ForMember(x => x.Nome, c => c.MapFrom(a => a.Usuario.Nome));
 
+                // Notes 
+                config.CreateMap<NotesObterResponse, Notes>().ReverseMap();
 
+                //Documento
+                config.CreateMap<DocumentoObterResponse, Documento>().ReverseMap();
+
+                // Tag
+                config.CreateMap<TagObterResponse, Tag>().ReverseMap();
+
+                //TagsNotas
+                config.CreateMap<TagsNotasObterResponse, TagsNotas>().ReverseMap();
             });
 
             var mapper = mapperConfig.CreateMapper();

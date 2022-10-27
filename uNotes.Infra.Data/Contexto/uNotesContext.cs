@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using uNotes.Domain.Entidades;
 using uNotes.Infra.Data.Mappings;
 
@@ -26,6 +21,11 @@ namespace uNotes.Infra.Data.Contexto
         public DbSet<Cargo>? Cargos { get; set; }
         public DbSet<Grupo>? Grupos { get; set; }
         public DbSet<UsuarioGrupo>? UsuariosGrupos {get; set;}
+        public DbSet<Notes>? Notes { get; set; }
+        public DbSet<Colaboradores>? Colaboradores { get; set; }
+        public DbSet<Documento>? Documentos { get; set; }
+        public DbSet<Tag>? Tags { get; set; }
+        public DbSet<TagsNotas>? TagsNotas { get; set; }
         public uNotesContext() { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

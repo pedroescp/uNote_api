@@ -16,5 +16,10 @@
             Nome = cargo.Nome;
             Descricao = cargo.Descricao;
         }
+
+        internal void Atualizar(Tag tag)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,7 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Requests\Notes1\**" />
+    <Compile Remove="Requests\NovaPasta1\**" />
+    <EmbeddedResource Remove="Requests\Notes1\**" />
+    <EmbeddedResource Remove="Requests\NovaPasta1\**" />
+    <EntityDeploy Remove="Requests\Notes1\**" />
+    <EntityDeploy Remove="Requests\NovaPasta1\**" />
+    <None Remove="Requests\Notes1\**" />
+    <None Remove="Requests\NovaPasta1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="AutoMapper\" />
+    <Folder Include="Requests\NovaPasta\" />
+    <Folder Include="Responses\NovaPasta\" />
   </ItemGroup>
 
   <ItemGroup>
