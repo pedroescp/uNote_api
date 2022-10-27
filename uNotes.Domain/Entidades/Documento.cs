@@ -1,12 +1,21 @@
 ﻿namespace uNotes.Domain.Entidades
 {
-    internal class Documento : EntidadeBase
+    public class Documento : EntidadeBase
     {
-        public string Titulo { get; set; }
-        public string Texto { get; set; }
-        public string CriadorId { get; set; }
-        public string Lixeira { get; set; }
-        public string UsuarioAtualizacaoId { get; set; }
+        protected Documento()
+        {
 
+        }
+        public string Titulo { get; set; }
+        public string? Texto { get; set; }
+        public Guid CriadorId { get; set; }
+        public bool Lixeira { get; set; }
+        public Guid UsuarioAtualizacaoId { get; set; }
+
+        public void Atualizar(Documento novoDocumento)
+        {
+            Titulo = novoDocumento.Titulo;
+            Texto = novoDocumento.Texto;
+        }
     }
 }

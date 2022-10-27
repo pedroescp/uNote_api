@@ -50,6 +50,78 @@ namespace uNotes.Infra.Data.Migrations
                     b.ToTable("Cargos");
                 });
 
+            modelBuilder.Entity("uNotes.Domain.Entidades.Colaboradores", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DataExclusao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DataInclusao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("DocumentoId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NotaId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Colaboradores");
+                });
+
+            modelBuilder.Entity("uNotes.Domain.Entidades.Documento", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CriadorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DataExclusao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DataInclusao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("Lixeira")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Texto")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UsuarioAtualizacaoId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Documentos");
+                });
+
             modelBuilder.Entity("uNotes.Domain.Entidades.Grupo", b =>
                 {
                     b.Property<Guid>("Id")
@@ -72,6 +144,84 @@ namespace uNotes.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Grupos");
+                });
+
+            modelBuilder.Entity("uNotes.Domain.Entidades.Notes", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CriadorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DataExclusao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DataInclusao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<Guid>("DocumentoId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Fixado")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("Lixeira")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Texto")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UsuarioAtualizacaoId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notes");
+                });
+
+            modelBuilder.Entity("uNotes.Domain.Entidades.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UsuarioId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("uNotes.Domain.Entidades.TagsNotas", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("NotaId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TagsNotas");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Usuario", b =>
@@ -114,6 +264,9 @@ namespace uNotes.Infra.Data.Migrations
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<Guid>("UsuarioPaiId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 

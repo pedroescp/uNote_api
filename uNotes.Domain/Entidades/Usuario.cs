@@ -10,6 +10,7 @@
         public Guid CargoId { get; set; }
         public Guid? Avatar { get; set; }
         public IEnumerable<UsuarioGrupo>? Grupos { get; set; }
+        public Guid UsuarioPaiId { get; set; }
 
         //Entidades de navegação
         public virtual Cargo Cargo { get; set; }
