@@ -10,6 +10,7 @@ using uNotes.Domain.Services.Interface.Repository;
 using uNotes.Domain.Services.Interface.Service;
 using uNotes.Infra.CrossCutting.Notificacoes;
 using uNotes.Infra.CrossCutting.UoW;
+using uNotes.Infra.CrossCutting.WebSocketService;
 using uNotes.Infra.Data.Contexto;
 using uNotes.Infra.Data.Repository;
 
@@ -49,6 +50,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<IDocumentoService, DocumentoService>();
             services.AddScoped<ITagService, TagService>();
             services.AddScoped<ITagsNotasService, TagsNotasService>();
+            services.AddScoped<IWebSocketCalls, WebSocketCalls>();
             #endregion
 
             #region APPSERVICES
