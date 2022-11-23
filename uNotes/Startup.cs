@@ -80,8 +80,7 @@ namespace uNotes.Api
             app.UseCors(x => x
                         .AllowAnyMethod()
                         .AllowAnyHeader()
-                        .SetIsOriginAllowed(origin => true)
-                        .AllowCredentials());
+                        .AllowAnyOrigin());
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
