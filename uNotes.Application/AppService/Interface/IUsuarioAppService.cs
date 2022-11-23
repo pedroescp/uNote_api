@@ -8,7 +8,7 @@ namespace uNotes.Application.AppService.Interface
         UsuarioAdicionarRequest Adicionar(UsuarioAdicionarRequest user);
         string Atualizar(UsuarioAtualizarRequest user);
         void Remover(Guid id);
-        LoginObterResponse Autenticar(string emailLogin, string senha);
+        LoginObterResponse Autenticar(UsuarioAutenticarRequest usuario);
         IEnumerable<UsuarioObterResponse> ObterTodos();
         UsuarioObterResponse ObterPorId(Guid id);
     }

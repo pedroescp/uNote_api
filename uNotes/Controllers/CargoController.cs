@@ -18,10 +18,10 @@ namespace uNotes.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Adicionar(CargoAdicionarRequest usuario) => CustomPostResponse(_cargoAppService.Adicionar(usuario));
+        public IActionResult Adicionar([FromBody] CargoAdicionarRequest usuario) => CustomPostResponse(_cargoAppService.Adicionar(usuario));
 
         [HttpPut]
-        public IActionResult Atualizar(CargoAtualizarRequest usuario) => CustomPutResponse(_cargoAppService.Atualizar(usuario));
+        public IActionResult Atualizar([FromBody] CargoAtualizarRequest usuario) => CustomPutResponse(_cargoAppService.Atualizar(usuario));
 
         [HttpGet("obter-por-id")]
         public IActionResult ObterPorId(Guid id) => CustomPostResponse(_cargoAppService.ObterPorId(id));

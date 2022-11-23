@@ -19,9 +19,9 @@ namespace uNotes.Application.AppService
         private readonly INotificador _notificador;
         private readonly IAutenticacaoService _autenticacaoService;
 
-        public UsuarioAppService(IUsuarioService userService, 
-                                 IUnitOfWork unitOfWork, 
-                                 IMapper mapper, 
+        public UsuarioAppService(IUsuarioService userService,
+                                 IUnitOfWork unitOfWork,
+                                 IMapper mapper,
                                  INotificador notificador,
                                  IAutenticacaoService autenticacaoService)
         {
@@ -36,29 +36,34 @@ namespace uNotes.Application.AppService
         {
             _usuarioService.AdicionarUsuario(_mapper.Map<Usuario>(user));
             _unitOfWork.Commit();
-            return user; 
+            return user;
         }
 
-        public LoginObterResponse Autenticar(string emailLogin, string senha)
+        public LoginObterResponse Autenticar(UsuarioAutenticarRequest usuario)
         {
-            var usuario = _usuarioService.ObterUsuarioPorLoginOuEmail(emailLogin);
-            if (usuario is null)
+            if (usuario == null || usuario.EmailLogin == null || usuario.Senha == null)
+            {
+                _notificador.AdicionarNotificacao("Objeto inválido");
+                return null;
+            }
+            var usuarioObtido = _usuarioService.ObterUsuarioPorLoginOuEmail(usuario.EmailLogin);
+            if (usuarioObtido is null)
             {
                 _notificador.AdicionarNotificacao("Usuário e/ou senha inválidos");
                 return null;
             }
-            if (usuario.Senha != Criptografia.Encrypt(senha, TipoCriptografia.SenhaLogin))
+            if (usuarioObtido.Senha != Criptografia.Encrypt(usuario.Senha, TipoCriptografia.SenhaLogin))
             {
                 _notificador.AdicionarNotificacao("Usuário e/ou senha inválidos");
                 return null;
             }
-            if (usuario.DataExclusao.HasValue)
+            if (usuarioObtido.DataExclusao.HasValue)
             {
                 _notificador.AdicionarNotificacao("Usuário excluido");
                 return null;
             }
 
-            var token = _autenticacaoService.GerarTokenClaims(usuario.Email);
+            var token = _autenticacaoService.GerarTokenClaims(usuarioObtido.Email);
             if (token == null)
             {
                 _notificador.AdicionarNotificacao("Não foi possivel criar token");
@@ -68,10 +73,10 @@ namespace uNotes.Application.AppService
             return new LoginObterResponse
             {
                 Token = token,
-                Nome = usuario.Nome,
-                Login = usuario.Login,
-                Email = usuario.Email,
-                CargoId = usuario.CargoId
+                Nome = usuarioObtido.Nome,
+                Login = usuarioObtido.Login,
+                Email = usuarioObtido.Email,
+                CargoId = usuarioObtido.CargoId
             };
         }
 

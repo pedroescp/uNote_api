@@ -1,15 +1,10 @@
-﻿using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using uNotes.Infra.CrossCutting.IoC;
-using uNotes.Api.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
+using uNotes.Api.Configuration;
 using uNotes.Infra.CrossCutting.Constantes;
+using uNotes.Infra.CrossCutting.IoC;
 using uNotes.Infra.Data.Contexto;
 
 namespace uNotes.Api
@@ -60,6 +55,7 @@ namespace uNotes.Api
 
             services.AddCors();
             services.AddSwaggerConfig();
+
         }
 
         public void Configure(IApplicationBuilder app, ConfiguracoesSeed configSeed,IWebHostEnvironment env)
@@ -99,6 +95,13 @@ namespace uNotes.Api
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            var websocketOptions = new WebSocketOptions
+            {
+                KeepAliveInterval = TimeSpan.FromMinutes(1)
+            };
+
+            app.UseWebSockets(websocketOptions);
 
             app.UseEndpoints(endpoints =>
             {

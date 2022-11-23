@@ -16,16 +16,16 @@ namespace uNotes.Api
         {
             _usuarioAppService = usuarioAppService;
         }
-
+        [AllowAnonymous]
         [HttpPost]
-        public IActionResult Adicionar(UsuarioAdicionarRequest usuario) => CustomPostResponse(_usuarioAppService.Adicionar(usuario));
+        public IActionResult Adicionar([FromBody] UsuarioAdicionarRequest usuario) => CustomPostResponse(_usuarioAppService.Adicionar(usuario));
 
         [HttpPut]
-        public IActionResult Atualizar(UsuarioAtualizarRequest usuario) => CustomPutResponse(_usuarioAppService.Atualizar(usuario));
+        public IActionResult Atualizar([FromBody] UsuarioAtualizarRequest usuario) => CustomPutResponse(_usuarioAppService.Atualizar(usuario));
 
         [AllowAnonymous]
         [HttpPost("autenticar")]
-        public IActionResult Autenticar(string emailLogin, string senha) => CustomResponse(_usuarioAppService.Autenticar(emailLogin, senha));
+        public IActionResult Autenticar([FromBody] UsuarioAutenticarRequest usuario) => CustomResponse(_usuarioAppService.Autenticar(usuario));
 
         [HttpGet("obter-por-id")]
         public IActionResult ObterPorId(Guid id) => CustomPostResponse(_usuarioAppService.ObterPorId(id));
