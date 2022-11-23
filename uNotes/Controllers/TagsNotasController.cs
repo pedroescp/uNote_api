@@ -18,10 +18,10 @@ namespace uNotes.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Adicionar(TagsNotasAdicionarRequest usuario) => CustomPostResponse(_tagsNotasAppService.Adicionar(usuario));
+        public IActionResult Adicionar([FromBody] TagsNotasAdicionarRequest usuario) => CustomPostResponse(_tagsNotasAppService.Adicionar(usuario));
         
         [HttpPut]
-        public IActionResult Atualizar(TagsNotasAtualizarRequest usuario) => CustomPutResponse(_tagsNotasAppService.Atualizar(usuario));
+        public IActionResult Atualizar([FromBody] TagsNotasAtualizarRequest usuario) => CustomPutResponse(_tagsNotasAppService.Atualizar(usuario));
 
         [HttpGet("obter-por-id")]
         public IActionResult ObterPorId(Guid id) => CustomResponse(_tagsNotasAppService.ObterPorId(id));

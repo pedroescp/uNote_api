@@ -20,10 +20,10 @@ namespace uNotes.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Adicionar(GrupoAdicionarRequest usuario) => CustomPostResponse(_grupoAppService.Adicionar(usuario));
+        public IActionResult Adicionar([FromBody] GrupoAdicionarRequest usuario) => CustomPostResponse(_grupoAppService.Adicionar(usuario));
 
         [HttpPut]
-        public IActionResult Atualizar(GrupoAtualizarRequest usuario) => CustomPutResponse(_grupoAppService.Atualizar(usuario));
+        public IActionResult Atualizar([FromBody] GrupoAtualizarRequest usuario) => CustomPutResponse(_grupoAppService.Atualizar(usuario));
 
         [HttpGet("obter-por-id")]
         public IActionResult ObterPorId(Guid id) => CustomPostResponse(_grupoAppService.ObterPorId(id));

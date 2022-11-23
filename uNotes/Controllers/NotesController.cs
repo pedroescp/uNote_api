@@ -18,10 +18,10 @@ namespace uNotes.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Adicionar(NotesAdicionarRequest notes) => CustomPostResponse(_notesAppService.Adicionar(notes));
+        public IActionResult Adicionar([FromBody] NotesAdicionarRequest notes) => CustomPostResponse(_notesAppService.Adicionar(notes));
 
         [HttpPut]
-        public IActionResult Atualizar(NotesAtualizarRequest notes) => CustomPutResponse(_notesAppService.Atualizar(notes));
+        public IActionResult Atualizar([FromBody] NotesAtualizarRequest notes) => CustomPutResponse(_notesAppService.Atualizar(notes));
 
         [HttpGet("obter-por-id")]
         public IActionResult ObterPorId(Guid id) => CustomPostResponse(_notesAppService.ObterPorId(id));
