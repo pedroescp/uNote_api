@@ -18,10 +18,10 @@ namespace uNotes.Api.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Adicionar(ColaboradoresAdicionarRequest usuario) => CustomPostResponse(_colaboradoresAppService.Adicionar(usuario));
+        public IActionResult Adicionar([FromBody] ColaboradoresAdicionarRequest usuario) => CustomPostResponse(_colaboradoresAppService.Adicionar(usuario));
 
         [HttpPut]
-        public IActionResult Atualizar(ColaboradoresAtualizarRequest usuario) => CustomPutResponse(_colaboradoresAppService.Atualizar(usuario));
+        public IActionResult Atualizar([FromBody] ColaboradoresAtualizarRequest usuario) => CustomPutResponse(_colaboradoresAppService.Atualizar(usuario));
 
         [HttpGet("obter-por-id")]
         public IActionResult ObterPorId(Guid id) => CustomPostResponse(_colaboradoresAppService.ObterPorId(id));
