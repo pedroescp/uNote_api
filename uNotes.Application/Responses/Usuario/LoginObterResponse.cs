@@ -6,6 +6,6 @@
         public string Login { get; set; }
         public string Email { get; set; }
         public string Nome { get; set; }
-        public Guid CargoId { get; set; }
+        public Guid? CargoId { get; set; }
     }
 }
