@@ -18,6 +18,7 @@ namespace uNotes.Infra.Data.Mappings
             builder.Property(x => x.Senha).IsRequired();
             builder.Property(x => x.Avatar).IsRequired(false);
             builder.Property(x => x.CargoId).IsRequired(false);
+            builder.Property(x => x.Telefone).IsRequired(false);
             builder.Property(x => x.UsuarioPaiId);
         }
     }
