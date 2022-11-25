@@ -15,7 +15,7 @@ namespace uNotes.Infra.Data.Mappings
             builder.Property(x => x.Titulo).IsRequired();
             builder.Property(x => x.CriadorId).IsRequired();
             builder.Property(x => x.UsuarioAtualizacaoId).IsRequired();
-            builder.Property(x => x.DocumentoId).IsRequired();
+            builder.Property(x => x.DocumentoId).IsRequired(false);
             builder.Property(x => x.Lixeira);
             builder.Property(x => x.Fixado);
         }

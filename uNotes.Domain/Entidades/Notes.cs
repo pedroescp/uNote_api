@@ -7,10 +7,10 @@
 
         public Guid CriadorId { get; set; }
 
-        public Boolean Lixeira { get; set; }
-        public Boolean Fixado  { get; set; }
+        public bool Lixeira { get; set; }
+        public bool Fixado  { get; set; }
         public Guid UsuarioAtualizacaoId { get; set; }
-        public Guid DocumentoId { get; set; }
+        public Guid? DocumentoId { get; set; }
 
         public void Atualizar(Notes novoNotes)
         {
