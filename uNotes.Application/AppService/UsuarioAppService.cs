@@ -36,6 +36,7 @@ namespace uNotes.Application.AppService
         {
             _usuarioService.AdicionarUsuario(_mapper.Map<Usuario>(user));
             _unitOfWork.Commit();
+            user.Senha = _usuarioService.Buscar(x => x.Email == user.Email).FirstOrDefault().Senha;
             return user;
         }
 
