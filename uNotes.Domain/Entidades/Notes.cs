@@ -4,9 +4,7 @@
     {
         public string Titulo { get; set; }
         public string Texto { get; set; }
-
         public Guid CriadorId { get; set; }
-
         public bool Lixeira { get; set; }
         public bool Fixado  { get; set; }
         public Guid UsuarioAtualizacaoId { get; set; }

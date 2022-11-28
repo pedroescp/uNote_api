@@ -18,6 +18,11 @@ namespace uNotes.Domain.Services
             antigoNotes.Atualizar(notes);
             return;
         }
+
+        public IEnumerable<Notes> ObterPorUsuario(Guid usuarioId)
+        {
+            return _notesRepository.ObterPorUsuario(usuarioId);
+        }
     }
 }
 

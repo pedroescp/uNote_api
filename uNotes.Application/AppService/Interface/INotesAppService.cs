@@ -11,6 +11,6 @@ namespace uNotes.Application.AppService.Interface
         void Remover(Guid id);
         IEnumerable<NotesObterResponse> ObterTodos();
         NotesObterResponse ObterPorId(Guid id);
-        
+        IEnumerable<NotesObterResponse> ObterPorUsuario(Guid usuarioId);
     }
 }

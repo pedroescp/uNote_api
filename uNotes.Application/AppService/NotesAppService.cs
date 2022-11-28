@@ -45,6 +45,11 @@ namespace uNotes.Application.AppService
             return _mapper.Map<IEnumerable<NotesObterResponse>>(_notesService.ObterTodos());
         }
 
+        public IEnumerable<NotesObterResponse> ObterPorUsuario(Guid usuarioId)
+        {
+            return _mapper.Map<IEnumerable<NotesObterResponse>>(_notesService.ObterPorUsuario(usuarioId));
+        }
+
         public void Remover(Guid id)
         {
             _notesService.Remover(id);

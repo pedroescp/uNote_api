@@ -9,5 +9,10 @@ namespace uNotes.Infra.Data.Repository
         public NotesRepository(uNotesContext context) : base(context)
         {
         }
+
+        public IEnumerable<Notes> ObterPorUsuario(Guid usuarioId)
+        {
+            return DbSet.Where(x => x.CriadorId == usuarioId);
+        }
     }
 }

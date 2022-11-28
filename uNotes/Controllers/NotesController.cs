@@ -28,5 +28,9 @@ namespace uNotes.Api.Controllers
 
         [HttpGet]
         public IActionResult ObterTodos() => CustomPostResponse(_notesAppService.ObterTodos());
+
+        [HttpGet("obter-por-usuario")]
+        public IActionResult ObterPorUsuario(Guid usuarioId) => CustomResponse(_notesAppService.ObterPorUsuario(usuarioId));
+
     }
 }
