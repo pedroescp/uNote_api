@@ -40,7 +40,10 @@ namespace uNotes.Application.AppService
                 return "Objeto inválido";
             var existeUsuario = _usuarioService.ExisteUsuario(usuario);
             if (!string.IsNullOrEmpty(existeUsuario))
-                return existeUsuario;
+            {
+                _notificador.AdicionarNotificacao(existeUsuario);
+                return null;
+            }
             _usuarioService.AdicionarUsuario(usuario);
             _unitOfWork.Commit();
             return "Usuario criado com sucesso";

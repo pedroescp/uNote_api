@@ -18,7 +18,10 @@ namespace uNotes.Api
         }
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Adicionar([FromBody] UsuarioAdicionarRequest usuario) => CustomPostResponse(_usuarioAppService.Adicionar(usuario));
+        public IActionResult Adicionar([FromBody] UsuarioAdicionarRequest usuario)
+        {
+            CustomPostResponse(_usuarioAppService.Adicionar(usuario));
+        }
 
         [HttpPut]
         public IActionResult Atualizar([FromBody] UsuarioAtualizarRequest usuario) => CustomPutResponse(_usuarioAppService.Atualizar(usuario));
