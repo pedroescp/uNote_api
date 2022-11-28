@@ -8,9 +8,11 @@ namespace uNotes.Application.AppService.Interface
     {
         NotesAdicionarRequest Adicionar(NotesAdicionarRequest user);
         string Atualizar(NotesAtualizarRequest user);
-        void Remover(Guid id);
+        string RemoverLogica(Guid id);
         IEnumerable<NotesObterResponse> ObterTodos();
         NotesObterResponse ObterPorId(Guid id);
         IEnumerable<NotesObterResponse> ObterPorUsuario(Guid usuarioId);
+        IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId);
+        IEnumerable<Notes> ObterPorUsuarioArquivado(Guid usuarioId);
     }
 }

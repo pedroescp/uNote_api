@@ -6,5 +6,8 @@ namespace uNotes.Domain.Services.Interface.Service
     {
         void AtualizarNotes(Notes notes);
         IEnumerable<Notes> ObterPorUsuario(Guid usuarioId);
+        IEnumerable<Notes> ObterPorUsuarioArquivado(Guid usuarioId);
+        IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId);
+        string RemoverLogica(Guid notaId);
     }
 }

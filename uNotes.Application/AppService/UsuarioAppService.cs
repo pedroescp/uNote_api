@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Security.Cryptography.X509Certificates;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Usuario;
 using uNotes.Application.Responses.Usuario;
@@ -32,11 +33,17 @@ namespace uNotes.Application.AppService
             _mapper = mapper;
         }
 
-        public UsuarioAdicionarRequest Adicionar(UsuarioAdicionarRequest user)
+        public string Adicionar(UsuarioAdicionarRequest user)
         {
-            _usuarioService.AdicionarUsuario(_mapper.Map<Usuario>(user));
+            var usuario = _mapper.Map<Usuario>(user);
+            if (usuario == null)
+                return "Objeto inválido";
+            var existeUsuario = _usuarioService.ExisteUsuario(usuario);
+            if (!string.IsNullOrEmpty(existeUsuario))
+                return existeUsuario;
+            _usuarioService.AdicionarUsuario(usuario);
             _unitOfWork.Commit();
-            return user;
+            return "Usuario criado com sucesso";
         }
 
         public LoginObterResponse Autenticar(UsuarioAutenticarRequest usuario)

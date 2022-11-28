@@ -7,5 +7,6 @@ namespace uNotes.Domain.Services.Interface.Service
         void AdicionarUsuario(Usuario usuario);
         void AtualizarUsuario(Usuario usuario);
         Usuario? ObterUsuarioPorLoginOuEmail(string login);
+        string ExisteUsuario(Usuario usuario);
     }
 }

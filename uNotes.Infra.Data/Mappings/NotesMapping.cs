@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using uNotes.Domain.Entidades;
+using uNotes.Domain.Enumerators;
 using uNotes.Infra.Data.Constantes;
 
 namespace uNotes.Infra.Data.Mappings
@@ -16,8 +17,7 @@ namespace uNotes.Infra.Data.Mappings
             builder.Property(x => x.CriadorId).IsRequired();
             builder.Property(x => x.UsuarioAtualizacaoId).IsRequired();
             builder.Property(x => x.DocumentoId).IsRequired(false);
-            builder.Property(x => x.Lixeira);
-            builder.Property(x => x.Fixado);
+            builder.Property(x => x.Status).IsRequired().HasDefaultValue(StatusNota.Ativo);
         }
     }
 }

@@ -31,5 +31,15 @@ namespace uNotes.Domain.Services
         {
             return _usuarioRepository.ObterPorEmailOuLogin(login);
         }
+
+        public string ExisteUsuario(Usuario usuario)
+        {
+            var usuarios = _usuarioRepository.ObterTodos();
+            if (usuarios.Any(x => x.Email == usuario.Email))
+                return "Email já existente";
+            if (usuarios.Any(x => x.Login == usuario.Login))
+                return "Login já existente";
+            return "";
+        }
     }
 }

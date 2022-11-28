@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using uNotes.Infra.Data.Contexto;
@@ -11,9 +12,10 @@ using uNotes.Infra.Data.Contexto;
 namespace uNotes.Infra.Data.Migrations
 {
     [DbContext(typeof(uNotesContext))]
-    partial class uNotesContextModelSnapshot : ModelSnapshot
+    [Migration("20221128220948_MudancaEmNotas")]
+    partial class MudancaEmNotas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +49,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cargos", (string)null);
+                    b.ToTable("Cargos");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Colaboradores", b =>
@@ -83,7 +85,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colaboradores", (string)null);
+                    b.ToTable("Colaboradores");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Documento", b =>
@@ -119,7 +121,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Documentos", (string)null);
+                    b.ToTable("Documentos");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Grupo", b =>
@@ -143,7 +145,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Grupos", (string)null);
+                    b.ToTable("Grupos");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Notes", b =>
@@ -183,7 +185,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Notes", (string)null);
+                    b.ToTable("Notes");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Tag", b =>
@@ -201,7 +203,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.TagsNotas", b =>
@@ -218,7 +220,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TagsNotas", (string)null);
+                    b.ToTable("TagsNotas");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Usuario", b =>
@@ -298,7 +300,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("UsuariosGrupos", (string)null);
+                    b.ToTable("UsuariosGrupos");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Usuario", b =>

@@ -23,6 +23,9 @@ namespace uNotes.Api.Controllers
         [HttpPut]
         public IActionResult Atualizar([FromBody] NotesAtualizarRequest notes) => CustomPutResponse(_notesAppService.Atualizar(notes));
 
+        [HttpDelete]
+        public IActionResult Remover(Guid notaId) => CustomDeleteResponse(_notesAppService.RemoverLogica(notaId));
+
         [HttpGet("obter-por-id")]
         public IActionResult ObterPorId(Guid id) => CustomPostResponse(_notesAppService.ObterPorId(id));
 
@@ -32,5 +35,10 @@ namespace uNotes.Api.Controllers
         [HttpGet("obter-por-usuario")]
         public IActionResult ObterPorUsuario(Guid usuarioId) => CustomResponse(_notesAppService.ObterPorUsuario(usuarioId));
 
+        [HttpGet("obter-por-usuario-arquivado")]
+        public IActionResult ObterPorUsuarioArquivado(Guid usuarioId) => CustomResponse(_notesAppService.ObterPorUsuarioArquivado(usuarioId));
+
+        [HttpGet("obter-por-usuario-lixeira")]
+        public IActionResult ObterPorUsuarioLixeira(Guid usuarioId) => CustomResponse(_notesAppService.ObterPorUsuarioLixeira(usuarioId));
     }
 }

@@ -21,7 +21,26 @@ namespace uNotes.Domain.Services
 
         public IEnumerable<Notes> ObterPorUsuario(Guid usuarioId)
         {
-            return _notesRepository.ObterPorUsuario(usuarioId);
+            return _notesRepository.ObterPorUsuarioTodos(usuarioId);
+        }
+
+        public IEnumerable<Notes> ObterPorUsuarioArquivado(Guid usuarioId)
+        {
+            return _notesRepository.ObterPorUsuarioArquivado(usuarioId);
+        }
+
+        public IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId)
+        {
+            return _notesRepository.ObterPorUsuarioLixeira(usuarioId);
+        }
+
+        public string RemoverLogica(Guid notaId)
+        {
+            var nota = _notesRepository.ObterPorId(notaId);
+            if (nota == null)
+                return "Nota não encontrada";
+            nota.RemoverLogica();
+            return "Nota removida com sucesso";
         }
     }
 }

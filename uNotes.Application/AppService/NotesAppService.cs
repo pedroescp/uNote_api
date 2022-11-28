@@ -50,10 +50,21 @@ namespace uNotes.Application.AppService
             return _mapper.Map<IEnumerable<NotesObterResponse>>(_notesService.ObterPorUsuario(usuarioId));
         }
 
-        public void Remover(Guid id)
+        public string RemoverLogica(Guid id)
         {
-            _notesService.Remover(id);
+            string removerMensagem = _notesService.RemoverLogica(id);
             _unitOfWork.Commit();
+            return removerMensagem;
+        }
+
+        public IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId)
+        {
+            return _notesService.ObterPorUsuarioLixeira(usuarioId);
+        }
+
+        public IEnumerable<Notes> ObterPorUsuarioArquivado(Guid usuarioId)
+        {
+            return _notesService.ObterPorUsuarioArquivado(usuarioId);
         }
     }
 }
