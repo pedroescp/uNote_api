@@ -20,8 +20,12 @@ namespace uNotes.Api
         [HttpPost]
         public IActionResult Adicionar([FromBody] UsuarioAdicionarRequest usuario)
         {
-            CustomPostResponse(_usuarioAppService.Adicionar(usuario));
+            return CustomPostResponse(_usuarioAppService.Adicionar(usuario));
         }
+
+        [HttpPost]
+        [Route("adicionar-avatar")]
+        public async Task<IActionResult> AdicionarAvatar([FromForm] UsuarioAdicionarAvatarRequest objeto) => CustomResponse(await _usuarioAppService.AdicionarAvatar(objeto.Arquivo, objeto.UsuarioId));
 
         [HttpPut]
         public IActionResult Atualizar([FromBody] UsuarioAtualizarRequest usuario) => CustomPutResponse(_usuarioAppService.Atualizar(usuario));

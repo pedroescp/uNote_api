@@ -23,5 +23,15 @@
             Telefone = novoUsuario.Telefone;
             CargoId = novoUsuario.CargoId;
         }
+
+        public void AdicionarAvatar(Guid avatarId)
+        {
+            Avatar = avatarId;
+        }
+
+        public void RemoverAvatar()
+        {
+            Avatar = null;
+        }
     }
 }

@@ -3,15 +3,18 @@ using uNotes.Domain.Services.Interface.Repository;
 using uNotes.Domain.Services.Interface.Service;
 using uNotes.Infra.CrossCutting.Criptografia;
 using uNotes.Infra.CrossCutting.Enums;
+using uNotes.Infra.CrossCutting.Notificacoes;
 
 namespace uNotes.Domain.Services
 {
     public class UsuarioService : Service<Usuario>, IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
-        public UsuarioService(IUsuarioRepository repository) : base(repository)
+        private readonly INotificador _notificador;
+        public UsuarioService(IUsuarioRepository repository, INotificador notificador) : base(repository)
         {
             _usuarioRepository = repository;
+            _notificador = notificador;
         }
 
         public void AtualizarUsuario(Usuario usuario)
@@ -30,6 +33,28 @@ namespace uNotes.Domain.Services
         public Usuario? ObterUsuarioPorLoginOuEmail(string login)
         {
             return _usuarioRepository.ObterPorEmailOuLogin(login);
+        }
+
+        public void AdicionarAvatar(Guid avatarId, Guid usuarioId)
+        {
+            var usuario = _usuarioRepository.ObterPorId(usuarioId);
+            if(usuario == null)
+            {
+                _notificador.AdicionarNotificacao("Usuário não encontrado");
+                return;
+            }
+            usuario.AdicionarAvatar(avatarId);
+        }
+
+        public void RemoverAvatar(Guid usuarioId)
+        {
+            var usuario = _usuarioRepository.ObterPorId(usuarioId);
+            if (usuario == null)
+            {
+                _notificador.AdicionarNotificacao("Usuário não encontrado");
+                return;
+            }
+            usuario.RemoverAvatar();
         }
 
         public string ExisteUsuario(Usuario usuario)

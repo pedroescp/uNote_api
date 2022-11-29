@@ -8,6 +8,8 @@ using uNotes.Domain.Entidades;
 using uNotes.Domain.Services;
 using uNotes.Domain.Services.Interface.Repository;
 using uNotes.Domain.Services.Interface.Service;
+using uNotes.Infra.CrossCutting.AWS;
+using uNotes.Infra.CrossCutting.AWS.Interfaces;
 using uNotes.Infra.CrossCutting.Notificacoes;
 using uNotes.Infra.CrossCutting.UoW;
 using uNotes.Infra.CrossCutting.WebSocketService;
@@ -51,6 +53,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<ITagService, TagService>();
             services.AddScoped<ITagsNotasService, TagsNotasService>();
             services.AddScoped<IWebSocketCalls, WebSocketCalls>();
+            services.AddScoped<IAWSS3Service, AWSS3Service>();
             #endregion
 
             #region APPSERVICES

@@ -1,4 +1,5 @@
-﻿using uNotes.Application.Requests.Usuario;
+﻿using Microsoft.AspNetCore.Http;
+using uNotes.Application.Requests.Usuario;
 using uNotes.Application.Responses.Usuario;
 
 namespace uNotes.Application.AppService.Interface
@@ -11,5 +12,6 @@ namespace uNotes.Application.AppService.Interface
         LoginObterResponse Autenticar(UsuarioAutenticarRequest usuario);
         IEnumerable<UsuarioObterResponse> ObterTodos();
         UsuarioObterResponse ObterPorId(Guid id);
+        Task<string> AdicionarAvatar(IFormFile arquivo, Guid usuarioId);
     }
 }

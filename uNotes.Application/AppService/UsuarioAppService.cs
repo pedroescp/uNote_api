@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography.X509Certificates;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Usuario;
 using uNotes.Application.Responses.Usuario;
 using uNotes.Domain.Entidades;
 using uNotes.Domain.Services.Interface.Service;
+using uNotes.Infra.CrossCutting.AWS.Interfaces;
 using uNotes.Infra.CrossCutting.Criptografia;
 using uNotes.Infra.CrossCutting.Enums;
 using uNotes.Infra.CrossCutting.Notificacoes;
@@ -19,15 +21,18 @@ namespace uNotes.Application.AppService
         private readonly IMapper _mapper;
         private readonly INotificador _notificador;
         private readonly IAutenticacaoService _autenticacaoService;
+        private readonly IAWSS3Service _AWSS3Service;
 
         public UsuarioAppService(IUsuarioService userService,
                                  IUnitOfWork unitOfWork,
                                  IMapper mapper,
                                  INotificador notificador,
+                                 IAWSS3Service aWSS3Service,
                                  IAutenticacaoService autenticacaoService)
         {
             _usuarioService = userService;
             _notificador = notificador;
+            _AWSS3Service = aWSS3Service;
             _autenticacaoService = autenticacaoService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -105,6 +110,47 @@ namespace uNotes.Application.AppService
         public IEnumerable<UsuarioObterResponse> ObterTodos()
         {
             return _mapper.Map<IEnumerable<UsuarioObterResponse>>(_usuarioService.ObterTodos());
+        }
+
+        public async Task<string> AdicionarAvatar(IFormFile arquivo, Guid usuarioId)
+        {
+            await RemoverAvatar(usuarioId);
+            if (_notificador.TemNotificacao())
+                return null;
+            var result = await _AWSS3Service.UploadArquivo(arquivo);
+            if(result == null)
+            {
+                _notificador.AdicionarNotificacao("Falha ao salvar imagem");
+                return null;
+            }
+            _usuarioService.AdicionarAvatar(Guid.Parse(result.Id), usuarioId);
+            if (_notificador.TemNotificacao())
+                return null;
+            _unitOfWork.Commit();
+            return "Avatar adicionado com sucesso";
+        }
+
+        private async Task RemoverAvatar(Guid usuarioId)
+        {
+            var usuario = _usuarioService.ObterPorId(usuarioId);
+            if (usuario == null)
+            {
+                _notificador.AdicionarNotificacao("Usuário não encontrado");
+                return;
+            }
+            if (!usuario.Avatar.HasValue)
+            {
+                return;
+            }
+            var result = await _AWSS3Service.ExcluirArquivo(usuario.Avatar.Value);
+            if (result == false)
+            {
+                _notificador.AdicionarNotificacao("Falha ao excluir arquivo");
+                return;
+            }
+            _usuarioService.RemoverAvatar(usuarioId);
+            if (_notificador.TemNotificacao())
+                return;
         }
 
         public void Remover(Guid id)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Amazon.S3;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -55,10 +56,9 @@ namespace uNotes.Api
 
             services.AddCors();
             services.AddSwaggerConfig();
-
         }
 
-        public void Configure(IApplicationBuilder app, ConfiguracoesSeed configSeed,IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, ConfiguracoesSeed configSeed, IWebHostEnvironment env)
         {
             try
             {
@@ -69,11 +69,12 @@ namespace uNotes.Api
 
                 throw;
             }
-            
+
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(c => {
+                app.UseSwaggerUI(c =>
+                {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api - uNotes v1");
                 });
             }
@@ -82,25 +83,27 @@ namespace uNotes.Api
                         .AllowAnyHeader()
                         .AllowAnyOrigin());
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
+            //app.UseDefaultFiles();
 
-            app.UseHttpsRedirection();
+            //app.UseStaticFiles();
+
+            //app.UseHttpsRedirection();
+
+
+            //app.UseCors("AllowSpecificOrigin");
+
+            //var websocketOptions = new WebSocketOptions
+            //{
+            //    KeepAliveInterval = TimeSpan.FromMinutes(1)
+            //};
+
+            //app.UseWebSockets(websocketOptions);
 
             app.UseRouting();
-
-            app.UseCors("AllowSpecificOrigin");
 
             app.UseAuthentication();
 
             app.UseAuthorization();
-
-            var websocketOptions = new WebSocketOptions
-            {
-                KeepAliveInterval = TimeSpan.FromMinutes(1)
-            };
-
-            app.UseWebSockets(websocketOptions);
 
             app.UseEndpoints(endpoints =>
             {
