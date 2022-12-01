@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.IdentityModel.Tokens.Jwt;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Notes;
 using uNotes.Application.Responses.Notes;
@@ -8,7 +9,7 @@ using uNotes.Infra.CrossCutting.UoW;
 
 namespace uNotes.Application.AppService
 {
-    public class NotesAppService : INotesAppService
+    public class NotesAppService : BaseAppService, INotesAppService
     {
         private readonly INotesService _notesService;
         private readonly IUnitOfWork _unitOfWork;
@@ -21,8 +22,11 @@ namespace uNotes.Application.AppService
             _mapper = mapper;
         }
 
-        public NotesAdicionarRequest Adicionar(NotesAdicionarRequest user)
+        public NotesAdicionarRequest Adicionar(NotesAdicionarRequest user, string token)
         {
+            var usuarioId = ObterInformacoesToken(token);
+            user.CriadorId = Guid.Parse(usuarioId);
+            user.UsuarioAtualizacaoId = Guid.Parse(usuarioId);
             _notesService.Adicionar(_mapper.Map<Notes>(user));
             _unitOfWork.Commit();
             return user;

@@ -18,7 +18,7 @@ namespace uNotes.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Adicionar([FromBody] NotesAdicionarRequest notes) => CustomPostResponse(_notesAppService.Adicionar(notes));
+        public IActionResult Adicionar([FromBody] NotesAdicionarRequest notes) => CustomPostResponse(_notesAppService.Adicionar(notes, notes.Token));
 
         [HttpPut]
         public IActionResult Atualizar([FromBody] NotesAtualizarRequest notes) => CustomPutResponse(_notesAppService.Atualizar(notes));

@@ -6,7 +6,7 @@ namespace uNotes.Application.AppService.Interface
 {
     public interface INotesAppService
     {
-        NotesAdicionarRequest Adicionar(NotesAdicionarRequest user);
+        NotesAdicionarRequest Adicionar(NotesAdicionarRequest user, string token);
         string Atualizar(NotesAtualizarRequest user);
         string RemoverLogica(Guid id);
         IEnumerable<NotesObterResponse> ObterTodos();

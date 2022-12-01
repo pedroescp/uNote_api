@@ -7,5 +7,6 @@
         public Guid CriadorId { get; set; }
         public Guid UsuarioAtualizacaoId { get; set; }
         public Guid? DocumentoId { get; set; }
+        public string Token { get; set; }
     }
 }

@@ -15,8 +15,7 @@ namespace uNotes.Infra.Data.Repository
         {
             return DbSet.Where(x => x.CriadorId == usuarioId 
                                     && x.DataExclusao == null 
-                                    && x.Status == StatusNota.Fixado 
-                                    && x.Status == StatusNota.Ativo)
+                                    && (x.Status == StatusNota.Fixado || x.Status == StatusNota.Ativo))
                         .OrderBy(x => x.DataAtualizacao)
                         .ThenBy(x => x.Status);
         }
@@ -33,7 +32,6 @@ namespace uNotes.Infra.Data.Repository
         public IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId)
         {
             return DbSet.Where(x => x.CriadorId == usuarioId
-                                    && x.DataExclusao == null
                                     && x.Status == StatusNota.Lixeira)
                         .OrderBy(x => x.DataAtualizacao)
                         .ThenBy(x => x.Status);
