@@ -9,5 +9,6 @@ namespace uNotes.Domain.Services.Interface.Service
         IEnumerable<Notes> ObterPorUsuarioArquivado(Guid usuarioId);
         IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId);
         string RemoverLogica(Guid notaId);
+        string ArquivarLogica(Guid notaId);
     }
 }

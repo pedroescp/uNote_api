@@ -14,7 +14,7 @@ using uNotes.Infra.CrossCutting.UoW;
 
 namespace uNotes.Application.AppService
 {
-    public class UsuarioAppService : IUsuarioAppService
+    public class UsuarioAppService : BaseAppService, IUsuarioAppService
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IUnitOfWork _unitOfWork;
@@ -112,8 +112,14 @@ namespace uNotes.Application.AppService
             return _mapper.Map<IEnumerable<UsuarioObterResponse>>(_usuarioService.ObterTodos());
         }
 
-        public async Task<string> AdicionarAvatar(IFormFile arquivo, Guid usuarioId)
+        public async Task<string> AdicionarAvatar(IFormFile arquivo, string token)
         {
+            var usuarioId = ObterInformacoesToken(token[7..]);
+            if (usuarioId == null)
+            {
+                _notificador.AdicionarNotificacao("Token inválido");
+                return null;
+            }
             await RemoverAvatar(usuarioId);
             if (_notificador.TemNotificacao())
                 return null;

@@ -22,6 +22,13 @@ namespace uNotes.Domain.Entidades
         public void RemoverLogica()
         {
             DataExclusao = DateTime.Now;
+            Status = StatusNota.Lixeira;
+        }
+
+        public void ArquivarLogica()
+        {
+            DataAtualizacao = DateTime.Now;
+            Status = StatusNota.Arquivada;
         }
     }
 }

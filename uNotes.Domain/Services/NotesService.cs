@@ -42,6 +42,15 @@ namespace uNotes.Domain.Services
             nota.RemoverLogica();
             return "Nota removida com sucesso";
         }
+
+        public string ArquivarLogica(Guid notaId)
+        {
+            var nota = _notesRepository.ObterPorId(notaId);
+            if (nota == null)
+                return "Nota não encontrada";
+            nota.ArquivarLogica();
+            return "Nota removida com sucesso";
+        }
     }
 }
 

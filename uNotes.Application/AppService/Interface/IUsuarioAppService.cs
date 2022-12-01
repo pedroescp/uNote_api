@@ -12,6 +12,6 @@ namespace uNotes.Application.AppService.Interface
         LoginObterResponse Autenticar(UsuarioAutenticarRequest usuario);
         IEnumerable<UsuarioObterResponse> ObterTodos();
         UsuarioObterResponse ObterPorId(Guid id);
-        Task<string> AdicionarAvatar(IFormFile arquivo, Guid usuarioId);
+        Task<string> AdicionarAvatar(IFormFile arquivo, string token);
     }
 }

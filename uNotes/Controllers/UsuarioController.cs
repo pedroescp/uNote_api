@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Usuario;
 using uNotes.Infra.CrossCutting.Notificacoes;
@@ -25,7 +26,7 @@ namespace uNotes.Api
 
         [HttpPost]
         [Route("adicionar-avatar")]
-        public async Task<IActionResult> AdicionarAvatar([FromForm] UsuarioAdicionarAvatarRequest objeto) => CustomResponse(await _usuarioAppService.AdicionarAvatar(objeto.Arquivo, objeto.UsuarioId));
+        public async Task<IActionResult> AdicionarAvatar([FromForm] UsuarioAdicionarAvatarRequest objeto) => CustomResponse(await _usuarioAppService.AdicionarAvatar(objeto.Arquivo, Request.Headers[HeaderNames.Authorization]));
 
         [HttpPut]
         public IActionResult Atualizar([FromBody] UsuarioAtualizarRequest usuario) => CustomPutResponse(_usuarioAppService.Atualizar(usuario));

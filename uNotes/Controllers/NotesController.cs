@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Notes;
 using uNotes.Infra.CrossCutting.Notificacoes;
@@ -18,10 +19,10 @@ namespace uNotes.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Adicionar([FromBody] NotesAdicionarRequest notes) => CustomPostResponse(_notesAppService.Adicionar(notes, notes.Token));
+        public IActionResult Adicionar([FromBody] NotesAdicionarRequest notes) => CustomPostResponse(_notesAppService.Adicionar(notes, Request.Headers[HeaderNames.Authorization]));
 
         [HttpPut]
-        public IActionResult Atualizar([FromBody] NotesAtualizarRequest notes) => CustomPutResponse(_notesAppService.Atualizar(notes));
+        public IActionResult Atualizar([FromBody] NotesAtualizarRequest notes) => CustomPutResponse(_notesAppService.Atualizar(notes, Request.Headers[HeaderNames.Authorization]));
 
         [HttpDelete]
         public IActionResult Remover(Guid notaId) => CustomDeleteResponse(_notesAppService.RemoverLogica(notaId));
@@ -33,12 +34,12 @@ namespace uNotes.Api.Controllers
         public IActionResult ObterTodos() => CustomPostResponse(_notesAppService.ObterTodos());
 
         [HttpGet("obter-por-usuario")]
-        public IActionResult ObterPorUsuario(Guid usuarioId) => CustomResponse(_notesAppService.ObterPorUsuario(usuarioId));
+        public IActionResult ObterPorUsuario() => CustomResponse(_notesAppService.ObterPorUsuario(Request.Headers[HeaderNames.Authorization]));
 
         [HttpGet("obter-por-usuario-arquivado")]
-        public IActionResult ObterPorUsuarioArquivado(Guid usuarioId) => CustomResponse(_notesAppService.ObterPorUsuarioArquivado(usuarioId));
+        public IActionResult ObterPorUsuarioArquivado() => CustomResponse(_notesAppService.ObterPorUsuarioArquivado(Request.Headers[HeaderNames.Authorization]));
 
         [HttpGet("obter-por-usuario-lixeira")]
-        public IActionResult ObterPorUsuarioLixeira(Guid usuarioId) => CustomResponse(_notesAppService.ObterPorUsuarioLixeira(usuarioId));
+        public IActionResult ObterPorUsuarioLixeira() => CustomResponse(_notesAppService.ObterPorUsuarioLixeira(Request.Headers[HeaderNames.Authorization]));
     }
 }

@@ -5,6 +5,7 @@ using uNotes.Application.Requests.Notes;
 using uNotes.Application.Responses.Notes;
 using uNotes.Domain.Entidades;
 using uNotes.Domain.Services.Interface.Service;
+using uNotes.Infra.CrossCutting.Notificacoes;
 using uNotes.Infra.CrossCutting.UoW;
 
 namespace uNotes.Application.AppService
@@ -12,28 +13,43 @@ namespace uNotes.Application.AppService
     public class NotesAppService : BaseAppService, INotesAppService
     {
         private readonly INotesService _notesService;
+        private readonly INotificador _notificador;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public NotesAppService(INotesService notesService, IUnitOfWork unitOfWork, IMapper mapper)
+        public NotesAppService(INotesService notesService, IUnitOfWork unitOfWork, IMapper mapper, INotificador notificador)
         {
             _notesService = notesService;
             _unitOfWork = unitOfWork;
+            _notificador = notificador;
             _mapper = mapper;
         }
 
         public NotesAdicionarRequest Adicionar(NotesAdicionarRequest user, string token)
         {
-            var usuarioId = ObterInformacoesToken(token);
-            user.CriadorId = Guid.Parse(usuarioId);
-            user.UsuarioAtualizacaoId = Guid.Parse(usuarioId);
+            var usuarioId = ObterInformacoesToken(token[7..]);
+            if (usuarioId == null)
+            {
+                _notificador.AdicionarNotificacao("Token inválido");
+                return null;
+            }
+            user.CriadorId = usuarioId;
+            user.UsuarioAtualizacaoId = usuarioId;
             _notesService.Adicionar(_mapper.Map<Notes>(user));
             _unitOfWork.Commit();
             return user;
         }
 
-        public string Atualizar(NotesAtualizarRequest user)
+        public string Atualizar(NotesAtualizarRequest user, string token)
         {
+            var usuarioId = ObterInformacoesToken(token[7..]);
+            if (usuarioId == null)
+            {
+                _notificador.AdicionarNotificacao("Token inválido");
+                return null;
+            }
+            user.CriadorId = usuarioId;
+            user.UsuarioAtualizacaoId = usuarioId;
             _notesService.AtualizarNotes(_mapper.Map<Notes>(user));
             _unitOfWork.Commit();
             return "Notes Atualizado com Sucesso";
@@ -49,8 +65,14 @@ namespace uNotes.Application.AppService
             return _mapper.Map<IEnumerable<NotesObterResponse>>(_notesService.ObterTodos());
         }
 
-        public IEnumerable<NotesObterResponse> ObterPorUsuario(Guid usuarioId)
+        public IEnumerable<NotesObterResponse> ObterPorUsuario(string token)
         {
+            var usuarioId = ObterInformacoesToken(token[7..]);
+            if (usuarioId == null)
+            {
+                _notificador.AdicionarNotificacao("Token inválido");
+                return null;
+            }
             return _mapper.Map<IEnumerable<NotesObterResponse>>(_notesService.ObterPorUsuario(usuarioId));
         }
 
@@ -61,13 +83,25 @@ namespace uNotes.Application.AppService
             return removerMensagem;
         }
 
-        public IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId)
+        public IEnumerable<Notes> ObterPorUsuarioLixeira(string token)
         {
+            var usuarioId = ObterInformacoesToken(token[7..]);
+            if (usuarioId == null)
+            {
+                _notificador.AdicionarNotificacao("Token inválido");
+                return null;
+            }
             return _notesService.ObterPorUsuarioLixeira(usuarioId);
         }
 
-        public IEnumerable<Notes> ObterPorUsuarioArquivado(Guid usuarioId)
+        public IEnumerable<Notes> ObterPorUsuarioArquivado(string token)
         {
+            var usuarioId = ObterInformacoesToken(token[7..]);
+            if (usuarioId == null)
+            {
+                _notificador.AdicionarNotificacao("Token inválido");
+                return null;
+            }
             return _notesService.ObterPorUsuarioArquivado(usuarioId);
         }
     }

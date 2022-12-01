@@ -7,12 +7,12 @@ namespace uNotes.Application.AppService.Interface
     public interface INotesAppService
     {
         NotesAdicionarRequest Adicionar(NotesAdicionarRequest user, string token);
-        string Atualizar(NotesAtualizarRequest user);
+        string Atualizar(NotesAtualizarRequest user, string token);
         string RemoverLogica(Guid id);
         IEnumerable<NotesObterResponse> ObterTodos();
         NotesObterResponse ObterPorId(Guid id);
-        IEnumerable<NotesObterResponse> ObterPorUsuario(Guid usuarioId);
-        IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId);
-        IEnumerable<Notes> ObterPorUsuarioArquivado(Guid usuarioId);
+        IEnumerable<NotesObterResponse> ObterPorUsuario(string token);
+        IEnumerable<Notes> ObterPorUsuarioLixeira(string token);
+        IEnumerable<Notes> ObterPorUsuarioArquivado(string token);
     }
 }
