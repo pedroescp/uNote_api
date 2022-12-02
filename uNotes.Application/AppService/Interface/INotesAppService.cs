@@ -14,5 +14,6 @@ namespace uNotes.Application.AppService.Interface
         IEnumerable<NotesObterResponse> ObterPorUsuario(string token);
         IEnumerable<Notes> ObterPorUsuarioLixeira(string token);
         IEnumerable<Notes> ObterPorUsuarioArquivado(string token);
+        string ArquivarLogica(Guid notaId);
     }
 }

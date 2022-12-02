@@ -27,6 +27,9 @@ namespace uNotes.Api.Controllers
         [HttpDelete]
         public IActionResult Remover(Guid notaId) => CustomDeleteResponse(_notesAppService.RemoverLogica(notaId));
 
+        [HttpDelete("arquivar")]
+        public IActionResult Arquivar(Guid notaId) => CustomDeleteResponse(_notesAppService.ArquivarLogica(notaId));
+
         [HttpGet("obter-por-id")]
         public IActionResult ObterPorId(Guid id) => CustomPostResponse(_notesAppService.ObterPorId(id));
 

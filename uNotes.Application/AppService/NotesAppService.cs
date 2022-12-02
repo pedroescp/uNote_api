@@ -104,5 +104,10 @@ namespace uNotes.Application.AppService
             }
             return _notesService.ObterPorUsuarioArquivado(usuarioId);
         }
+
+        public string ArquivarLogica(Guid notaId)
+        {
+            return _notesService.ArquivarLogica(notaId);
+        }
     }
 }
