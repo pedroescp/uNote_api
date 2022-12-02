@@ -107,7 +107,11 @@ namespace uNotes.Application.AppService
 
         public string ArquivarLogica(Guid notaId)
         {
-            return _notesService.ArquivarLogica(notaId);
+            _notesService.ArquivarLogica(notaId);
+            if (_notificador.TemNotificacao())
+                return null;
+            _unitOfWork.Commit();
+            return "Nota arquivada com sucesso";
         }
     }
 }

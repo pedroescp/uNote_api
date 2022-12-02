@@ -1,15 +1,18 @@
 ﻿using uNotes.Domain.Entidades;
 using uNotes.Domain.Services.Interface.Repository;
 using uNotes.Domain.Services.Interface.Service;
+using uNotes.Infra.CrossCutting.Notificacoes;
 
 namespace uNotes.Domain.Services
 {
     public class NotesService : Service<Notes>, INotesService
     {
         private readonly INotesRepository _notesRepository;
-        public NotesService(INotesRepository repository) : base(repository)
+        private readonly INotificador _notificador;
+        public NotesService(INotesRepository repository, INotificador notificador) : base(repository)
         {
             _notesRepository = repository;
+            _notificador = notificador;
         }
 
         public void AtualizarNotes(Notes notes)
@@ -43,13 +46,15 @@ namespace uNotes.Domain.Services
             return "Nota removida com sucesso";
         }
 
-        public string ArquivarLogica(Guid notaId)
+        public void ArquivarLogica(Guid notaId)
         {
             var nota = _notesRepository.ObterPorId(notaId);
             if (nota == null)
-                return "Nota não encontrada";
+            {
+                _notificador.AdicionarNotificacao("Nota não encontrada");
+                return;
+            }
             nota.ArquivarLogica();
-            return "Nota removida com sucesso";
         }
     }
 }
