@@ -25,10 +25,23 @@ namespace uNotes.Domain.Entidades
             Status = StatusNota.Lixeira;
         }
 
+        public void ReverterRemocao()
+        {
+            DataExclusao = null;
+            DataAtualizacao = DateTime.Now;
+            Status = StatusNota.Ativo;
+        }
+
         public void ArquivarLogica()
         {
             DataAtualizacao = DateTime.Now;
             Status = StatusNota.Arquivada;
+        }
+
+        public void ReverterArquivar()
+        {
+            DataAtualizacao = DateTime.Now;
+            Status = StatusNota.Ativo;
         }
     }
 }

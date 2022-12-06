@@ -1,4 +1,5 @@
 ﻿using uNotes.Domain.Entidades;
+using uNotes.Domain.Enumerators;
 using uNotes.Domain.Services.Interface.Repository;
 using uNotes.Domain.Services.Interface.Service;
 using uNotes.Infra.CrossCutting.Notificacoes;
@@ -42,7 +43,14 @@ namespace uNotes.Domain.Services
             var nota = _notesRepository.ObterPorId(notaId);
             if (nota == null)
                 return "Nota não encontrada";
-            nota.RemoverLogica();
+            if(nota.Status == StatusNota.Lixeira)
+            {
+                nota.RemoverLogica();
+            }
+            else
+            {
+                nota.RemoverLogica();
+            }
             return "Nota removida com sucesso";
         }
 
@@ -54,7 +62,14 @@ namespace uNotes.Domain.Services
                 _notificador.AdicionarNotificacao("Nota não encontrada");
                 return;
             }
-            nota.ArquivarLogica();
+            if(nota.Status == StatusNota.Arquivada)
+            {
+                nota.ReverterArquivar();
+            }
+            else
+            {
+                nota.ArquivarLogica();
+            }     
         }
     }
 }
