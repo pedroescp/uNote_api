@@ -36,7 +36,7 @@ namespace uNotes.Api
         public IActionResult Autenticar([FromBody] UsuarioAutenticarRequest usuario) => CustomResponse(_usuarioAppService.Autenticar(usuario));
 
         [HttpGet("obter-por-id")]
-        public IActionResult ObterPorId(Guid id) => CustomPostResponse(_usuarioAppService.ObterPorId(id));
+        public IActionResult ObterPorId() => CustomPostResponse(_usuarioAppService.ObterPorId(Request.Headers[HeaderNames.Authorization]));
 
         [HttpGet]
         public IActionResult ObterTodos() => CustomPostResponse(_usuarioAppService.ObterTodos());

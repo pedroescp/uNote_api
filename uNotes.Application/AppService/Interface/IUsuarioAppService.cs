@@ -11,7 +11,7 @@ namespace uNotes.Application.AppService.Interface
         void Remover(Guid id);
         LoginObterResponse Autenticar(UsuarioAutenticarRequest usuario);
         IEnumerable<UsuarioObterResponse> ObterTodos();
-        UsuarioObterResponse ObterPorId(Guid id);
+        UsuarioObterResponse ObterPorId(string token);
         Task<string> AdicionarAvatar(IFormFile arquivo, string token);
     }
 }

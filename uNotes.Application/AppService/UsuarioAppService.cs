@@ -102,9 +102,15 @@ namespace uNotes.Application.AppService
             return "Usuário Atualizado com Sucesso";
         }
 
-        public UsuarioObterResponse ObterPorId(Guid id)
+        public UsuarioObterResponse ObterPorId(string token)
         {
-            return _mapper.Map<UsuarioObterResponse>(_usuarioService.ObterPorId(id));
+            var usuarioId = ObterInformacoesToken(token[7..]);
+            if (usuarioId == null)
+            {
+                _notificador.AdicionarNotificacao("Token inválido");
+                return null;
+            }
+            return _mapper.Map<UsuarioObterResponse>(_usuarioService.ObterPorId(usuarioId));
         }
 
         public IEnumerable<UsuarioObterResponse> ObterTodos()
