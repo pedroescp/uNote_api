@@ -19,6 +19,7 @@ namespace uNotes.Infra.Data.Contexto
 
         public DbSet<Usuario>? Usuarios { get; set; }
         public DbSet<Cargo>? Cargos { get; set; }
+        public DbSet<Categoria>? Categorias { get; set; }
         public DbSet<Grupo>? Grupos { get; set; }
         public DbSet<UsuarioGrupo>? UsuariosGrupos {get; set;}
         public DbSet<Notes>? Notes { get; set; }

@@ -19,8 +19,6 @@
 
   <ItemGroup>
     <Folder Include="AutoMapper\" />
-    <Folder Include="Requests\NovaPasta\" />
-    <Folder Include="Responses\NovaPasta\" />
   </ItemGroup>
 
   <ItemGroup>

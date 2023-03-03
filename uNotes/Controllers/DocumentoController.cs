@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using uNotes.Application.AppService.Interface;
-using uNotes.Application.Requests.Documento;
+using uNotes.Application.Requests.Documentos;
 using uNotes.Infra.CrossCutting.Notificacoes;
 
 namespace uNotes.Api.Controllers

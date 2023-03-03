@@ -39,6 +39,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<IDocumentoRepository, DocumentoRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<ITagsNotasRepository, TagsNotasRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             #endregion
 
             #region SERVICES
@@ -54,6 +55,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<ITagsNotasService, TagsNotasService>();
             services.AddScoped<IWebSocketCalls, WebSocketCalls>();
             services.AddScoped<IAWSS3Service, AWSS3Service>();
+            services.AddScoped<ICategoriaService, CategoriaService>();
             #endregion
 
             #region APPSERVICES
@@ -65,6 +67,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<IDocumentoAppService, DocumentoAppService>();
             services.AddScoped<ITagAppService, TagAppService>();
             services.AddScoped<ITagsNotasAppService, TagsNotasAppService>();
+            services.AddScoped<ICategoriaAppService, CategoriaAppService>();
 
             #endregion
 

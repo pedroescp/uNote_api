@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Colaboradores;
-using uNotes.Application.Requests.Documento;
-using uNotes.Application.Responses.Documento;
+using uNotes.Application.Requests.Documentos;
+using uNotes.Application.Responses.Documentos;
 using uNotes.Domain.Entidades;
 using uNotes.Domain.Services;
 using uNotes.Domain.Services.Interface.Service;

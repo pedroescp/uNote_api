@@ -1,14 +1,16 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using uNotes.Application.Requests.Cargo;
-using uNotes.Application.Requests.Documento;
+using uNotes.Application.Requests.Categorias;
+using uNotes.Application.Requests.Documentos;
 using uNotes.Application.Requests.Grupo;
 using uNotes.Application.Requests.Notes;
 using uNotes.Application.Requests.Tag;
 using uNotes.Application.Requests.TagsNotas;
 using uNotes.Application.Requests.Usuario;
 using uNotes.Application.Responses.Cargo;
-using uNotes.Application.Responses.Documento;
+using uNotes.Application.Responses.Categorias;
+using uNotes.Application.Responses.Documentos;
 using uNotes.Application.Responses.Grupo;
 using uNotes.Application.Responses.Notes;
 using uNotes.Application.Responses.Tag;
@@ -48,6 +50,10 @@ namespace PL.Application.AutoMapper
                 config.CreateMap<DocumentoAdicionarRequest, Documento>().ReverseMap();
                 config.CreateMap<DocumentoAtualizarRequest, Documento>().ReverseMap();
 
+                //Categorias
+                config.CreateMap<CategoriaAdicionarRequest, Categoria>().ReverseMap();
+                config.CreateMap<CategoriaAtualizarRequest, Categoria>().ReverseMap();
+
                 //Tag
                 config.CreateMap<TagAdicionarRequest, Tag>().ReverseMap();
                 config.CreateMap<TagAtualizarRequest, Tag>().ReverseMap();
@@ -56,12 +62,16 @@ namespace PL.Application.AutoMapper
                 config.CreateMap<TagsNotasAdicionarRequest, TagsNotas>().ReverseMap();
                 config.CreateMap<TagsNotasAtualizarRequest, TagsNotas>().ReverseMap();
 
-                //Responses--
+                //Responses----------------------------------------------------------
+
                 //Usuario
                 config.CreateMap<UsuarioObterResponse, Usuario>().ReverseMap();
 
                 //Cargo
                 config.CreateMap<CargoObterResponse, Cargo>().ReverseMap();
+
+                //Categorias
+                config.CreateMap<CategoriaObterResponse, Categoria>().ReverseMap();
 
                 // Grupo
                 config.CreateMap<GrupoObterResponse, Grupo>().ReverseMap()

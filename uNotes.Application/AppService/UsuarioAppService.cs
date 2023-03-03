@@ -105,7 +105,7 @@ namespace uNotes.Application.AppService
         public UsuarioObterResponse ObterPorId(string token)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);
-            if (usuarioId == null)
+            if (usuarioId == null || usuarioId == Guid.Empty)
             {
                 _notificador.AdicionarNotificacao("Token inválido");
                 return null;
@@ -121,7 +121,7 @@ namespace uNotes.Application.AppService
         public async Task<string> AdicionarAvatar(IFormFile arquivo, string token)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);
-            if (usuarioId == null)
+            if (usuarioId == null || usuarioId == Guid.Empty)
             {
                 _notificador.AdicionarNotificacao("Token inválido");
                 return null;

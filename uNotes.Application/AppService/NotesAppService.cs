@@ -28,7 +28,7 @@ namespace uNotes.Application.AppService
         public NotesAdicionarRequest Adicionar(NotesAdicionarRequest user, string token)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);
-            if (usuarioId == null)
+            if (usuarioId == null || usuarioId == Guid.Empty)
             {
                 _notificador.AdicionarNotificacao("Token inválido");
                 return null;
@@ -43,7 +43,7 @@ namespace uNotes.Application.AppService
         public string Atualizar(NotesAtualizarRequest user, string token)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);
-            if (usuarioId == null)
+            if (usuarioId == null || usuarioId == Guid.Empty)
             {
                 _notificador.AdicionarNotificacao("Token inválido");
                 return null;
@@ -68,7 +68,7 @@ namespace uNotes.Application.AppService
         public IEnumerable<NotesObterResponse> ObterPorUsuario(string token)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);
-            if (usuarioId == null)
+            if (usuarioId == null || usuarioId == Guid.Empty)
             {
                 _notificador.AdicionarNotificacao("Token inválido");
                 return null;
@@ -86,7 +86,7 @@ namespace uNotes.Application.AppService
         public IEnumerable<Notes> ObterPorUsuarioLixeira(string token)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);
-            if (usuarioId == null)
+            if (usuarioId == null || usuarioId == Guid.Empty)
             {
                 _notificador.AdicionarNotificacao("Token inválido");
                 return null;
@@ -97,7 +97,7 @@ namespace uNotes.Application.AppService
         public IEnumerable<Notes> ObterPorUsuarioArquivado(string token)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);
-            if (usuarioId == null)
+            if (usuarioId == null || usuarioId == Guid.Empty)
             {
                 _notificador.AdicionarNotificacao("Token inválido");
                 return null;

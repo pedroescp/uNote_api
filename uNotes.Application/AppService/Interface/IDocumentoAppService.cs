@@ -1,5 +1,5 @@
-﻿using uNotes.Application.Requests.Documento;
-using uNotes.Application.Responses.Documento;
+﻿using uNotes.Application.Requests.Documentos;
+using uNotes.Application.Responses.Documentos;
 
 namespace uNotes.Application.AppService.Interface
 {
