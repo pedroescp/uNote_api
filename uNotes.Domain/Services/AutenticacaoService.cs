@@ -42,7 +42,7 @@ namespace uNotes.Domain.Services
                 new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
                 new Claim(ClaimTypes.Name, usuario.Nome),
                 new Claim(ClaimTypes.Email, usuario.Email),
-                new Claim("Cargo", usuario.Cargo.Nome)
+                new Claim("Cargo", usuario.Cargo?.Nome ?? "")
             };
             return claims;
         }

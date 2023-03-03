@@ -1,15 +1,12 @@
-﻿using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using uNotes.Infra.CrossCutting.IoC;
-using uNotes.Api.Configuration;
+﻿using Amazon.S3;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
+using uNotes.Api.Configuration;
 using uNotes.Infra.CrossCutting.Constantes;
+using uNotes.Infra.CrossCutting.IoC;
+using uNotes.Infra.Data.Contexto;
 
 namespace uNotes.Api
 {
@@ -61,30 +58,48 @@ namespace uNotes.Api
             services.AddSwaggerConfig();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, ConfiguracoesSeed configSeed, IWebHostEnvironment env)
         {
-            
+            try
+            {
+                configSeed.SeedData().Wait();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI(c => {
+                app.UseSwaggerUI(c =>
+                {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api - uNotes v1");
                 });
             }
             app.UseCors(x => x
                         .AllowAnyMethod()
                         .AllowAnyHeader()
-                        .SetIsOriginAllowed(origin => true)
-                        .AllowCredentials());
+                        .AllowAnyOrigin());
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
+            //app.UseDefaultFiles();
 
-            app.UseHttpsRedirection();
+            //app.UseStaticFiles();
+
+            //app.UseHttpsRedirection();
+
+
+            //app.UseCors("AllowSpecificOrigin");
+
+            //var websocketOptions = new WebSocketOptions
+            //{
+            //    KeepAliveInterval = TimeSpan.FromMinutes(1)
+            //};
+
+            //app.UseWebSockets(websocketOptions);
 
             app.UseRouting();
-
-            app.UseCors("AllowSpecificOrigin");
 
             app.UseAuthentication();
 

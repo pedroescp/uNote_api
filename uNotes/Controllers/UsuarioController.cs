@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Usuario;
 using uNotes.Infra.CrossCutting.Notificacoes;
@@ -16,19 +17,26 @@ namespace uNotes.Api
         {
             _usuarioAppService = usuarioAppService;
         }
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult Adicionar([FromBody] UsuarioAdicionarRequest usuario)
+        {
+            return CustomPostResponse(_usuarioAppService.Adicionar(usuario));
+        }
 
         [HttpPost]
-        public IActionResult Adicionar(UsuarioAdicionarRequest usuario) => CustomPostResponse(_usuarioAppService.Adicionar(usuario));
+        [Route("adicionar-avatar")]
+        public async Task<IActionResult> AdicionarAvatar([FromForm] UsuarioAdicionarAvatarRequest objeto) => CustomResponse(await _usuarioAppService.AdicionarAvatar(objeto.Arquivo, Request.Headers[HeaderNames.Authorization]));
 
         [HttpPut]
-        public IActionResult Atualizar(UsuarioAtualizarRequest usuario) => CustomPutResponse(_usuarioAppService.Atualizar(usuario));
+        public IActionResult Atualizar([FromBody] UsuarioAtualizarRequest usuario) => CustomPutResponse(_usuarioAppService.Atualizar(usuario));
 
         [AllowAnonymous]
         [HttpPost("autenticar")]
-        public IActionResult Autenticar(string emailLogin, string senha) => CustomResponse(_usuarioAppService.Autenticar(emailLogin, senha));
+        public IActionResult Autenticar([FromBody] UsuarioAutenticarRequest usuario) => CustomResponse(_usuarioAppService.Autenticar(usuario));
 
         [HttpGet("obter-por-id")]
-        public IActionResult ObterPorId(Guid id) => CustomPostResponse(_usuarioAppService.ObterPorId(id));
+        public IActionResult ObterPorId() => CustomPostResponse(_usuarioAppService.ObterPorId(Request.Headers[HeaderNames.Authorization]));
 
         [HttpGet]
         public IActionResult ObterTodos() => CustomPostResponse(_usuarioAppService.ObterTodos());

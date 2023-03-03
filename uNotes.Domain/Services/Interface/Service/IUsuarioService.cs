@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using uNotes.Domain.Entidades;
+﻿using uNotes.Domain.Entidades;
 
 namespace uNotes.Domain.Services.Interface.Service
 {
@@ -12,5 +7,8 @@ namespace uNotes.Domain.Services.Interface.Service
         void AdicionarUsuario(Usuario usuario);
         void AtualizarUsuario(Usuario usuario);
         Usuario? ObterUsuarioPorLoginOuEmail(string login);
+        void AdicionarAvatar(Guid avatarId, Guid usuarioId);
+        void RemoverAvatar(Guid usuarioId);
+        string ExisteUsuario(Usuario usuario);
     }
 }

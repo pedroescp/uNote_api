@@ -7,8 +7,10 @@
         public string Email { get; set; }
         public string Senha { get; set; }
         public string Telefone { get; set; }
-        public Guid CargoId { get; set; }
+        public Guid? CargoId { get; set; }
         public Guid? Avatar { get; set; }
+        public IEnumerable<UsuarioGrupo>? Grupos { get; set; }
+        public Guid UsuarioPaiId { get; set; }
 
         //Entidades de navegação
         public virtual Cargo Cargo { get; set; }
@@ -20,6 +22,16 @@
             Email = novoUsuario.Email;
             Telefone = novoUsuario.Telefone;
             CargoId = novoUsuario.CargoId;
+        }
+
+        public void AdicionarAvatar(Guid avatarId)
+        {
+            Avatar = avatarId;
+        }
+
+        public void RemoverAvatar()
+        {
+            Avatar = null;
         }
     }
 }
