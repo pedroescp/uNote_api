@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using uNotaDocumento.Application.AppService.Interface;
 using uNotes.Application.Requests.Cargo;
 using uNotes.Application.Requests.Categorias;
 using uNotes.Application.Requests.Documentos;
 using uNotes.Application.Requests.Grupo;
+using uNotes.Application.Requests.NotaDocumentos;
 using uNotes.Application.Requests.Notes;
 using uNotes.Application.Requests.Tag;
 using uNotes.Application.Requests.TagsNotas;
@@ -46,6 +48,10 @@ namespace PL.Application.AutoMapper
                 config.CreateMap<NotesAdicionarRequest, Notes>().ReverseMap();
                 config.CreateMap<NotesAtualizarRequest, Notes>().ReverseMap();
 
+                //NotaDocumento
+                config.CreateMap<NotaDocumentoAdicionarRequest, NotaDocumento>().ReverseMap();
+                config.CreateMap<NotaDocumentoAtualizarRequest, NotaDocumento>().ReverseMap();
+
                 // Documentos
                 config.CreateMap<DocumentoAdicionarRequest, Documento>().ReverseMap();
                 config.CreateMap<DocumentoAtualizarRequest, Documento>().ReverseMap();
@@ -83,6 +89,9 @@ namespace PL.Application.AutoMapper
 
                 // Notes 
                 config.CreateMap<NotesObterResponse, Notes>().ReverseMap();
+
+                //NotaDocumento
+                config.CreateMap<NotaDocumentoObterResponse, NotaDocumento>().ReverseMap();
 
                 //Documento
                 config.CreateMap<DocumentoObterResponse, Documento>().ReverseMap();

@@ -12,5 +12,7 @@
         public const string Documento = "Documentos";
         public const string Tag = "Tag";
         public const string TagsNotas = "TagsNotas";
+        public const string Categoria = "Categoria";
+        public const string NotaDocumento = "NotaDocumento";
     }
 }

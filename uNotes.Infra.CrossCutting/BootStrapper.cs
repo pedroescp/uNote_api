@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PL.Application.AutoMapper;
+using uNotaDocumento.Application.AppService.Interface;
+using uNotaDocumento.Domain.Services;
 using uNotes.Application.AppService;
 using uNotes.Application.AppService.Interface;
 using uNotes.Domain.Entidades;
@@ -40,6 +42,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<ITagsNotasRepository, TagsNotasRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<INotaDocumentoRepository, NotaDocumentoRepository>();
             #endregion
 
             #region SERVICES
@@ -56,6 +59,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<IWebSocketCalls, WebSocketCalls>();
             services.AddScoped<IAWSS3Service, AWSS3Service>();
             services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<INotaDocumentoService, NotaDocumentoService>();
             #endregion
 
             #region APPSERVICES
@@ -68,6 +72,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<ITagAppService, TagAppService>();
             services.AddScoped<ITagsNotasAppService, TagsNotasAppService>();
             services.AddScoped<ICategoriaAppService, CategoriaAppService>();
+            services.AddScoped<INotaDocumentoAppService, NotaDocumentoAppService>();
 
             #endregion
 

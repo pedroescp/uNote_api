@@ -14,7 +14,7 @@ namespace uNotes.Infra.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Categoria> builder)
         {
-            builder.ToTable(Tabelas.Cargo);
+            builder.ToTable(Tabelas.Categoria);
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Titulo).IsRequired();
