@@ -27,6 +27,7 @@ namespace uNotes.Infra.Data.Contexto
         public DbSet<Documento>? Documentos { get; set; }
         public DbSet<Tag>? Tags { get; set; }
         public DbSet<TagsNotas>? TagsNotas { get; set; }
+        public DbSet<NotaDocumento> NotasDocumento { get; set; }
         public uNotesContext() { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

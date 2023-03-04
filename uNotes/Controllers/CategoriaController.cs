@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using uNotaDocumento.Application.AppService.Interface;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Categorias;
 using uNotes.Infra.CrossCutting.Notificacoes;
@@ -28,5 +29,12 @@ namespace uNotes.Api.Controllers
 
         [HttpGet]
         public IActionResult ObterTodos() => CustomPostResponse(_categoriaAppService.ObterTodos());
+
+        [HttpDelete]
+        public IActionResult Remover(Guid notaId)
+        {
+            _categoriaAppService.Remover(notaId);
+            return CustomResponse();
+        }
     }
 }
