@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using uNotaDocumento.Application.AppService.Interface;
 using uNotes.Application.Requests.NotaDocumentos;
+using uNotes.Application.Responses.NotaDocumentos;
 using uNotes.Application.Responses.Notes;
 using uNotes.Domain.Entidades;
 using uNotes.Domain.Services;
@@ -55,14 +56,14 @@ namespace uNotes.Application.AppService
             return "Nota Atualizada com Sucesso";
         }
 
-        public NotaDocumentoObterResponse ObterPorId(Guid id)
+        public NotaDocumentosObterResponse ObterPorId(Guid id)
         {
-            return _mapper.Map<NotaDocumentoObterResponse>(_notaDocumentoService.ObterPorId(id));
+            return _mapper.Map<NotaDocumentosObterResponse>(_notaDocumentoService.ObterPorId(id));
         }
 
-        public IEnumerable<NotaDocumentoObterResponse> ObterTodos()
+        public IEnumerable<NotaDocumentosObterResponse> ObterTodos()
         {
-            return _mapper.Map<IEnumerable<NotaDocumentoObterResponse>>(_notaDocumentoService.ObterTodos());
+            return _mapper.Map<IEnumerable<NotaDocumentosObterResponse>>(_notaDocumentoService.ObterTodos());
         }
 
         public void Remover(Guid id)

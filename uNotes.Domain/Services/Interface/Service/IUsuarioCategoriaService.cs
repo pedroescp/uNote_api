@@ -2,7 +2,7 @@
 
 namespace uNotes.Domain.Services.Interface.Service
 {
-    public interface IUsuarioGrupoService : IService<UsuarioGrupo>
+    public interface IUsuarioCategoriaService : IService<UsuarioCategoria>
     {
     }
 }

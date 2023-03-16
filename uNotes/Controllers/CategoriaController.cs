@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using uNotaDocumento.Application.AppService.Interface;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Categorias;
@@ -19,7 +20,7 @@ namespace uNotes.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Adicionar([FromBody] CategoriaAdicionarRequest usuario) => CustomPostResponse(_categoriaAppService.Adicionar(usuario));
+        public IActionResult Adicionar([FromBody] CategoriaAdicionarRequest usuario) => CustomPostResponse(_categoriaAppService.Adicionar(usuario, Request.Headers[HeaderNames.Authorization]));
 
         [HttpPut]
         public IActionResult Atualizar([FromBody] CategoriaAtualizarRequest usuario) => CustomPutResponse(_categoriaAppService.Atualizar(usuario));
@@ -29,6 +30,9 @@ namespace uNotes.Api.Controllers
 
         [HttpGet]
         public IActionResult ObterTodos() => CustomPostResponse(_categoriaAppService.ObterTodos());
+
+        [HttpGet("obter-por-usuario")]
+        public IActionResult ObterCategoriasPorUsuario(Guid usuarioId) => CustomPostResponse(_categoriaAppService.ObterCategoriasPorUsuario(usuarioId));
 
         [HttpDelete]
         public IActionResult Remover(Guid notaId)

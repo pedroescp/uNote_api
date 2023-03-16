@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>ce688ade-e6a7-485e-9c95-130d38867c11</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,5 +29,7 @@
     <ProjectReference Include="..\uNotes.Infra.CrossCutting\uNotes.Infra.CrossCutting.IoC.csproj" />
     <ProjectReference Include="..\uNotes.Infra.Data\uNotes.Infra.Data.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="3" /></VisualStudio></ProjectExtensions>
 
 </Project>

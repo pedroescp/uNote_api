@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
-using uNotaDocumento.Application.AppService.Interface;
 using uNotes.Application.Requests.Cargo;
 using uNotes.Application.Requests.Categorias;
 using uNotes.Application.Requests.Documentos;
-using uNotes.Application.Requests.Grupo;
 using uNotes.Application.Requests.NotaDocumentos;
 using uNotes.Application.Requests.Notes;
 using uNotes.Application.Requests.Tag;
@@ -13,7 +11,7 @@ using uNotes.Application.Requests.Usuario;
 using uNotes.Application.Responses.Cargo;
 using uNotes.Application.Responses.Categorias;
 using uNotes.Application.Responses.Documentos;
-using uNotes.Application.Responses.Grupo;
+using uNotes.Application.Responses.NotaDocumentos;
 using uNotes.Application.Responses.Notes;
 using uNotes.Application.Responses.Tag;
 using uNotes.Application.Responses.TagsNotas;
@@ -36,13 +34,6 @@ namespace PL.Application.AutoMapper
                 //Cargo
                 config.CreateMap<CargoAdicionarRequest, Cargo>().ReverseMap();
                 config.CreateMap<CargoAtualizarRequest, Cargo>().ReverseMap();
-
-                // Grupo
-                config.CreateMap<GrupoAdicionarRequest, Grupo>().ReverseMap();
-                config.CreateMap<GrupoAtualizarRequest, Grupo>().ReverseMap();
-
-                // UsuarioGrupo
-                config.CreateMap<VincularUsuarioRequest, UsuarioGrupo>().ReverseMap();
 
                 // Notes
                 config.CreateMap<NotesAdicionarRequest, Notes>().ReverseMap();
@@ -79,19 +70,11 @@ namespace PL.Application.AutoMapper
                 //Categorias
                 config.CreateMap<CategoriaObterResponse, Categoria>().ReverseMap();
 
-                // Grupo
-                config.CreateMap<GrupoObterResponse, Grupo>().ReverseMap()
-                    .ForMember(x => x.Usuarios, c => c.MapFrom(a => a.Vinculos));
-
-                // UsuarioGrupo
-                config.CreateMap<UsuarioGrupoResponse, UsuarioGrupo>().ReverseMap()
-                    .ForMember(x => x.Nome, c => c.MapFrom(a => a.Usuario.Nome));
-
                 // Notes 
                 config.CreateMap<NotesObterResponse, Notes>().ReverseMap();
 
                 //NotaDocumento
-                config.CreateMap<NotaDocumentoObterResponse, NotaDocumento>().ReverseMap();
+                config.CreateMap<NotaDocumentosObterResponse, NotaDocumento>().ReverseMap();
 
                 //Documento
                 config.CreateMap<DocumentoObterResponse, Documento>().ReverseMap();

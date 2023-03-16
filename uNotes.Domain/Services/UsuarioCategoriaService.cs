@@ -4,11 +4,10 @@ using uNotes.Domain.Services.Interface.Service;
 
 namespace uNotes.Domain.Services
 {
-    public class UsuarioGrupoService : Service<UsuarioGrupo>, IUsuarioGrupoService
+    public class UsuarioCategoriaService : Service<UsuarioCategoria>, IUsuarioCategoriaService
     {
-        public UsuarioGrupoService(IUsuarioGrupoRepository repository) : base(repository)
+        public UsuarioCategoriaService(IUsuarioCategoriaRepository repository) : base(repository)
         {
-         
         }
     }
 }

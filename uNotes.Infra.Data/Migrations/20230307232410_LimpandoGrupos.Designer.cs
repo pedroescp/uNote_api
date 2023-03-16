@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using uNotes.Infra.Data.Contexto;
@@ -11,9 +12,10 @@ using uNotes.Infra.Data.Contexto;
 namespace uNotes.Infra.Data.Migrations
 {
     [DbContext(typeof(uNotesContext))]
-    partial class uNotesContextModelSnapshot : ModelSnapshot
+    [Migration("20230307232410_LimpandoGrupos")]
+    partial class LimpandoGrupos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +60,6 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.Property<int>("CategoriaPai")
                         .HasColumnType("integer");
-
-                    b.Property<Guid>("CriadorId")
-                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("timestamp without time zone");
@@ -321,27 +320,6 @@ namespace uNotes.Infra.Data.Migrations
                     b.ToTable("Usuario", (string)null);
                 });
 
-            modelBuilder.Entity("uNotes.Domain.Entidades.UsuarioCategoria", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("CategoriaId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoriaId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("UsuarioCategoria");
-                });
-
             modelBuilder.Entity("uNotes.Domain.Entidades.Documento", b =>
                 {
                     b.HasOne("uNotes.Domain.Entidades.Categoria", "Categoria")
@@ -369,40 +347,14 @@ namespace uNotes.Infra.Data.Migrations
                     b.Navigation("Cargo");
                 });
 
-            modelBuilder.Entity("uNotes.Domain.Entidades.UsuarioCategoria", b =>
-                {
-                    b.HasOne("uNotes.Domain.Entidades.Categoria", "Categoria")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("uNotes.Domain.Entidades.Usuario", "Usuario")
-                        .WithMany("Categorias")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Categoria");
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("uNotes.Domain.Entidades.Categoria", b =>
                 {
                     b.Navigation("Documentos");
-
-                    b.Navigation("Usuarios");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Documento", b =>
                 {
                     b.Navigation("Notas");
-                });
-
-            modelBuilder.Entity("uNotes.Domain.Entidades.Usuario", b =>
-                {
-                    b.Navigation("Categorias");
                 });
 #pragma warning restore 612, 618
         }

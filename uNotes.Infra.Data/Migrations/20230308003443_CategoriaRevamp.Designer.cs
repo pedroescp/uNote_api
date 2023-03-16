@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using uNotes.Infra.Data.Contexto;
@@ -11,9 +12,10 @@ using uNotes.Infra.Data.Contexto;
 namespace uNotes.Infra.Data.Migrations
 {
     [DbContext(typeof(uNotesContext))]
-    partial class uNotesContextModelSnapshot : ModelSnapshot
+    [Migration("20230308003443_CategoriaRevamp")]
+    partial class CategoriaRevamp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

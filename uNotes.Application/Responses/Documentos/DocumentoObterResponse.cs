@@ -1,4 +1,5 @@
 ﻿using uNotaDocumento.Application.AppService.Interface;
+using uNotes.Application.Responses.NotaDocumentos;
 
 namespace uNotes.Application.Responses.Documentos
 {
@@ -8,6 +9,6 @@ namespace uNotes.Application.Responses.Documentos
         public string Titulo { get; set; }
         public string Texto { get; set; }
         public Guid? CategoriaId { get; set; }
-        public List<NotaDocumentoObterResponse> Documentos { get; set; }
+        public List<NotaDocumentosObterResponse> Notas { get; set; }
     }
 }

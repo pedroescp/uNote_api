@@ -34,8 +34,6 @@ namespace uNotes.Infra.CrossCutting.IoC
             #region REPOSITORIES
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ICargoRepository, CargoRepository>();
-            services.AddScoped<IGrupoRepository, GrupoRepository>();
-            services.AddScoped<IUsuarioGrupoRepository, UsuarioGrupoRepository>();
             services.AddScoped<INotesRepository, NotesRepository>();
             services.AddScoped<IColaboradoresRepository, ColaboradoresRepository>();
             services.AddScoped<IDocumentoRepository, DocumentoRepository>();
@@ -49,8 +47,6 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ICargoService, CargoService>();
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
-            services.AddScoped<IGrupoService, GrupoService>();
-            services.AddScoped<IUsuarioGrupoService, UsuarioGrupoService>();
             services.AddScoped<INotesService, NotesService>();
             services.AddScoped<IColaboradoresService, ColaboradoresService>();
             services.AddScoped<IDocumentoService, DocumentoService>();
@@ -65,7 +61,6 @@ namespace uNotes.Infra.CrossCutting.IoC
             #region APPSERVICES
             services.AddScoped<IUsuarioAppService, UsuarioAppService>();
             services.AddScoped<ICargoAppService, CargoAppService>();
-            services.AddScoped<IGrupoAppService, GrupoAppService>();
             services.AddScoped<INotesAppService, NotesAppService>();
             services.AddScoped<IColaboradoresAppService, ColaboradoresAppService>();
             services.AddScoped<IDocumentoAppService, DocumentoAppService>();

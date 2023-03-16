@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using uNotes.Domain.Enumerators;
+﻿using uNotes.Domain.Enumerators;
 
 namespace uNotes.Application.Responses.NotaDocumentos
 {

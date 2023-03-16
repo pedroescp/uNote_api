@@ -3,7 +3,7 @@
     public class Categoria : EntidadeBase
     {
         protected Categoria() { }
-        public Categoria(string titulo, int categoriaPai,List<Documento>? documentos)
+        public Categoria(string titulo, Guid? categoriaPai,List<Documento>? documentos)
         {
             Titulo = titulo;
             CategoriaPai = categoriaPai;
@@ -11,8 +11,10 @@
         }
 
         public string Titulo { get; set; }
-        public int CategoriaPai { get; set; }
+        public Guid? CategoriaPai { get; set; }
         public List<Documento>? Documentos { get; set; }
+        public Guid CriadorId { get; set; }
+        public List<UsuarioCategoria>? Usuarios { get; set; }
 
         public void Atualizar(Categoria newCategoria)
         {

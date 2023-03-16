@@ -2,8 +2,7 @@
 
 namespace uNotes.Domain.Services.Interface.Repository
 {
-    public interface IGrupoRepository : IRepository<Grupo>
+    public interface IUsuarioCategoriaRepository : IRepository<UsuarioCategoria>
     {
-        IEnumerable<Grupo> ObterGrupos();
     }
 }

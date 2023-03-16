@@ -18,5 +18,15 @@ namespace uNotes.Domain.Services
             antigaCategoria.Atualizar(cargo);
             return;
         }
+
+        public List<Categoria> ObterCategoriasPorUsuario(Guid usuarioId)
+        {
+            return _categoriaRepository.ObterCategoriasPorUsuario(usuarioId);   
+        }
+
+        public Categoria ObterPorCategoriaPai(Guid categoriaPaiId)
+        {
+            return _categoriaRepository.ObterPorCategoriaPai(categoriaPaiId);
+        }
     }
 }

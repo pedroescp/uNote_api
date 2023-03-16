@@ -5,8 +5,7 @@
         public const string Usuario = "Usuario";
         public const string Cargo = "Cargo";
         public const string TokenUsuario = "TokenUsuario";
-        public const string Grupo = "Grupo";
-        public const string UsuarioGrupo = "UsuarioGrupo";
+        public const string UsuarioCategoria = "UsuarioCategoria";
         public const string Notes = "Notes";
         public const string Colaboradores = "Colaboradores";
         public const string Documento = "Documentos";

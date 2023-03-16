@@ -9,8 +9,8 @@
         public string Telefone { get; set; }
         public Guid? CargoId { get; set; }
         public Guid? Avatar { get; set; }
-        public IEnumerable<UsuarioGrupo>? Grupos { get; set; }
         public Guid UsuarioPaiId { get; set; }
+        public List<UsuarioCategoria>? Categorias { get; set; }
 
         //Entidades de navegação
         public virtual Cargo Cargo { get; set; }

@@ -70,7 +70,7 @@ namespace uNotes.Api
                 throw;
             }
 
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsProduction())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
@@ -82,6 +82,14 @@ namespace uNotes.Api
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowAnyOrigin());
+
+            var host = new WebHostBuilder()
+                            .UseKestrel()
+                            .UseContentRoot(Directory.GetCurrentDirectory())
+                            .UseUrls("http://localhost:10010")
+                            .UseIISIntegration()
+                            .UseStartup<Startup>()
+                            .Build();
 
             //app.UseDefaultFiles();
 
