@@ -41,6 +41,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<ITagsNotasRepository, TagsNotasRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<INotaDocumentoRepository, NotaDocumentoRepository>();
+            services.AddScoped<IUsuarioCategoriaRepository, UsuarioCategoriaRepository>();
             #endregion
 
             #region SERVICES
@@ -56,6 +57,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<IAWSS3Service, AWSS3Service>();
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<INotaDocumentoService, NotaDocumentoService>();
+            services.AddScoped<IUsuarioCategoriaService, UsuarioCategoriaService>();
             #endregion
 
             #region APPSERVICES
@@ -68,7 +70,6 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<ITagsNotasAppService, TagsNotasAppService>();
             services.AddScoped<ICategoriaAppService, CategoriaAppService>();
             services.AddScoped<INotaDocumentoAppService, NotaDocumentoAppService>();
-
             #endregion
 
             services.AddDbContext<uNotesContext>(options => options.UseNpgsql(connectionString, o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));

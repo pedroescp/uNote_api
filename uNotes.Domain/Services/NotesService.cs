@@ -23,19 +23,19 @@ namespace uNotes.Domain.Services
             return;
         }
 
-        public IEnumerable<Notes> ObterPorUsuario(Guid usuarioId)
+        public IEnumerable<Notes> ObterPorUsuario(Guid usuarioId, string texto)
         {
-            return _notesRepository.ObterPorUsuarioTodos(usuarioId);
+            return _notesRepository.ObterPorUsuarioTodos(usuarioId, texto);
         }
 
-        public IEnumerable<Notes> ObterPorUsuarioArquivado(Guid usuarioId)
+        public IEnumerable<Notes> ObterPorUsuarioArquivado(Guid usuarioId, string texto)
         {
-            return _notesRepository.ObterPorUsuarioArquivado(usuarioId);
+            return _notesRepository.ObterPorUsuarioArquivado(usuarioId, texto);
         }
 
-        public IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId)
+        public IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId, string texto)
         {
-            return _notesRepository.ObterPorUsuarioLixeira(usuarioId);
+            return _notesRepository.ObterPorUsuarioLixeira(usuarioId, texto);
         }
 
         public string RemoverLogica(Guid notaId)
@@ -45,7 +45,7 @@ namespace uNotes.Domain.Services
                 return "Nota não encontrada";
             if(nota.Status == StatusNota.Lixeira)
             {
-                nota.RemoverLogica();
+                nota.ReverterRemocao();
             }
             else
             {

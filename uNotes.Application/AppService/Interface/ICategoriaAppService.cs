@@ -10,6 +10,6 @@ namespace uNotes.Application.AppService.Interface
         void Remover(Guid id);
         IEnumerable<CategoriaObterResponse> ObterTodos();
         CategoriaObterResponse ObterPorId(Guid id);
-        List<CategoriaObterResponse> ObterCategoriasPorUsuario(Guid usuarioId);
+        List<CategoriaObterResponse> ObterCategoriasPorUsuario(string token);
     }
 }

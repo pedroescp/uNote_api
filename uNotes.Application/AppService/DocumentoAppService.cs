@@ -50,5 +50,10 @@ namespace uNotes.Application.AppService
             _documentoService.Remover(id);
             _unitOfWork.Commit();
         }
+
+        public IEnumerable<DocumentoObterResponse> ObterPorDescricao(string texto)
+        {
+            return _mapper.Map<IEnumerable<DocumentoObterResponse>>(_documentoService.ObterPorDescricao(texto));
+        }
     }
 }

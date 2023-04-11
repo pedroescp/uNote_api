@@ -37,12 +37,12 @@ namespace uNotes.Api.Controllers
         public IActionResult ObterTodos() => CustomPostResponse(_notesAppService.ObterTodos());
 
         [HttpGet("obter-por-usuario")]
-        public IActionResult ObterPorUsuario() => CustomResponse(_notesAppService.ObterPorUsuario(Request.Headers[HeaderNames.Authorization]));
+        public IActionResult ObterPorUsuario(string? texto) => CustomResponse(_notesAppService.ObterPorUsuario(Request.Headers[HeaderNames.Authorization], texto));
 
         [HttpGet("obter-por-usuario-arquivado")]
-        public IActionResult ObterPorUsuarioArquivado() => CustomResponse(_notesAppService.ObterPorUsuarioArquivado(Request.Headers[HeaderNames.Authorization]));
+        public IActionResult ObterPorUsuarioArquivado(string? texto) => CustomResponse(_notesAppService.ObterPorUsuarioArquivado(Request.Headers[HeaderNames.Authorization], texto));
 
         [HttpGet("obter-por-usuario-lixeira")]
-        public IActionResult ObterPorUsuarioLixeira() => CustomResponse(_notesAppService.ObterPorUsuarioLixeira(Request.Headers[HeaderNames.Authorization]));
+        public IActionResult ObterPorUsuarioLixeira(string? texto) => CustomResponse(_notesAppService.ObterPorUsuarioLixeira(Request.Headers[HeaderNames.Authorization], texto));
     }
 }

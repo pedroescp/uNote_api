@@ -18,5 +18,10 @@ namespace uNotes.Domain.Services
             antigoDocumento.Atualizar(documento);
             return;
         }
+
+        public IEnumerable<Documento> ObterPorDescricao(string texto)
+        {
+            return _documentoRepository.ObterPorDescricao(texto);
+        }
     }
 }

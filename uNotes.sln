@@ -29,6 +29,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uNotes.Domain", "uNotes.Domain\uNotes.Domain.csproj", "{8340C9F1-0B4C-4127-A502-84E57B0D409A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uNotes.Infra.Data", "uNotes.Infra.Data\uNotes.Infra.Data.csproj", "{E0E0A7CA-AA36-427A-9B40-0DE31B72A1B1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9BDFB72C-D870-4703-B17E-8DC3ACC316D9} = {9BDFB72C-D870-4703-B17E-8DC3ACC316D9}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uNotes.Infra.CrossCutting.IoC", "uNotes.Infra.CrossCutting\uNotes.Infra.CrossCutting.IoC.csproj", "{7D4541EC-EB09-428A-9E43-6C898EDB0A6D}"
 EndProject
@@ -48,7 +51,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uNotes.Infra.CrossCutting.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uNotes.Infra.CrossCutting.WebSocketService", "src\uNotes.Infra.CrossCutting.WebSocketService\uNotes.Infra.CrossCutting.WebSocketService.csproj", "{953CCEC8-DE8E-485B-B828-D32C7BCF035A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uNotes.Infra.CrossCutting.AWS", "uNotes.Infra.CrossCutting.AWS\uNotes.Infra.CrossCutting.AWS.csproj", "{4B34FAFB-7116-44A5-97FE-742EEF4CEC6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uNotes.Infra.CrossCutting.AWS", "uNotes.Infra.CrossCutting.AWS\uNotes.Infra.CrossCutting.AWS.csproj", "{4B34FAFB-7116-44A5-97FE-742EEF4CEC6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uNotes.Infra.CrossCutting.Utils", "src\uNotes.Infra.CrossCutting.Utils\uNotes.Infra.CrossCutting.Utils.csproj", "{9BDFB72C-D870-4703-B17E-8DC3ACC316D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,6 +117,10 @@ Global
 		{4B34FAFB-7116-44A5-97FE-742EEF4CEC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B34FAFB-7116-44A5-97FE-742EEF4CEC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B34FAFB-7116-44A5-97FE-742EEF4CEC6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BDFB72C-D870-4703-B17E-8DC3ACC316D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BDFB72C-D870-4703-B17E-8DC3ACC316D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BDFB72C-D870-4703-B17E-8DC3ACC316D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BDFB72C-D870-4703-B17E-8DC3ACC316D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,6 +142,7 @@ Global
 		{7B42424E-2C5C-476F-A341-88B0CC11E5DA} = {8774EF4E-AD16-466D-AB39-37A88B5A767E}
 		{953CCEC8-DE8E-485B-B828-D32C7BCF035A} = {8774EF4E-AD16-466D-AB39-37A88B5A767E}
 		{4B34FAFB-7116-44A5-97FE-742EEF4CEC6A} = {8774EF4E-AD16-466D-AB39-37A88B5A767E}
+		{9BDFB72C-D870-4703-B17E-8DC3ACC316D9} = {8774EF4E-AD16-466D-AB39-37A88B5A767E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D18A9958-49B6-431F-8B5E-99852D033908}

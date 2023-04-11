@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\uNotes.Infra.CrossCutting.Utils\uNotes.Infra.CrossCutting.Utils.csproj" />
     <ProjectReference Include="..\uNotes.Domain\uNotes.Domain.csproj" />
   </ItemGroup>
 

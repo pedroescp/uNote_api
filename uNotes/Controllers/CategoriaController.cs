@@ -32,7 +32,7 @@ namespace uNotes.Api.Controllers
         public IActionResult ObterTodos() => CustomPostResponse(_categoriaAppService.ObterTodos());
 
         [HttpGet("obter-por-usuario")]
-        public IActionResult ObterCategoriasPorUsuario(Guid usuarioId) => CustomPostResponse(_categoriaAppService.ObterCategoriasPorUsuario(usuarioId));
+        public IActionResult ObterCategoriasPorUsuario() => CustomPostResponse(_categoriaAppService.ObterCategoriasPorUsuario(Request.Headers[HeaderNames.Authorization]));
 
         [HttpDelete]
         public IActionResult Remover(Guid notaId)

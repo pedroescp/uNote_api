@@ -17,6 +17,9 @@ namespace uNotes.Api.Controllers
             _documentosAppService = documentosAppService;
         }
 
+        [HttpGet("obter-por-texto")]
+        public IActionResult ObterPorDescricao(string texto) => CustomPostResponse(_documentosAppService.ObterPorDescricao(texto));
+
         [HttpPost]
         public IActionResult Adicionar([FromBody] DocumentoAdicionarRequest notes) => CustomPostResponse(_documentosAppService.Adicionar(notes));
 
@@ -28,5 +31,6 @@ namespace uNotes.Api.Controllers
 
         [HttpGet]
         public IActionResult ObterTodos() => CustomPostResponse(_documentosAppService.ObterTodos());
+
     }
 }

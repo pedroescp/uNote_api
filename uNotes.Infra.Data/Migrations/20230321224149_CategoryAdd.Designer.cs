@@ -12,8 +12,8 @@ using uNotes.Infra.Data.Contexto;
 namespace uNotes.Infra.Data.Migrations
 {
     [DbContext(typeof(uNotesContext))]
-    [Migration("20230308003443_CategoriaRevamp")]
-    partial class CategoriaRevamp
+    [Migration("20230321224149_CategoryAdd")]
+    partial class CategoryAdd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,8 +58,8 @@ namespace uNotes.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("CategoriaPai")
-                        .HasColumnType("integer");
+                    b.Property<Guid?>("CategoriaPai")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("CriadorId")
                         .HasColumnType("uuid");
@@ -341,7 +341,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("UsuarioCategoria");
+                    b.ToTable("UsuariosCategorias");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Documento", b =>

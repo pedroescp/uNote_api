@@ -11,31 +11,36 @@ namespace uNotes.Infra.Data.Repository
         {
         }
 
-        public IEnumerable<Notes> ObterPorUsuarioTodos(Guid usuarioId)
+        public IEnumerable<Notes> ObterPorUsuarioTodos(Guid usuarioId, string texto)
         {
-            return DbSet.Where(x => x.CriadorId == usuarioId 
+            return DbSet.Where(x => (string.IsNullOrEmpty(texto) || x.Texto.ToLower().Contains(texto.ToLower()) 
+                                    || x.Titulo.ToLower().Contains(texto.ToLower()))
+                                    && x.CriadorId == usuarioId 
                                     && x.DataExclusao == null 
                                     && (x.Status == StatusNota.Fixado || x.Status == StatusNota.Ativo))
                         .OrderBy(x => x.DataAtualizacao)
                         .ThenBy(x => x.Status);
         }
 
-        public IEnumerable<Notes> ObterPorUsuarioArquivado(Guid usuarioId)
+        public IEnumerable<Notes> ObterPorUsuarioArquivado(Guid usuarioId, string texto)
         {
-            return DbSet.Where(x => x.CriadorId == usuarioId
+            return DbSet.Where(x => (string.IsNullOrEmpty(texto) || x.Texto.ToLower().Contains(texto.ToLower())
+                                    || x.Titulo.ToLower().Contains(texto.ToLower()))
+                                    && x.CriadorId == usuarioId
                                     && x.DataExclusao == null
                                     && x.Status == StatusNota.Arquivada)
                         .OrderBy(x => x.DataAtualizacao)
                         .ThenBy(x => x.Status);
         }
 
-        public IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId)
+        public IEnumerable<Notes> ObterPorUsuarioLixeira(Guid usuarioId, string texto)
         {
-            return DbSet.Where(x => x.CriadorId == usuarioId
+            return DbSet.Where(x => (string.IsNullOrEmpty(texto) || x.Texto.ToLower().Contains(texto.ToLower())
+                                    || x.Titulo.ToLower().Contains(texto.ToLower()))
+                                    && x.CriadorId == usuarioId
                                     && x.Status == StatusNota.Lixeira)
                         .OrderBy(x => x.DataAtualizacao)
                         .ThenBy(x => x.Status);
         }
-
     }
 }

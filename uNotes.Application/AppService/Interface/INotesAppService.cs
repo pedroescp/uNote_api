@@ -11,9 +11,9 @@ namespace uNotes.Application.AppService.Interface
         string RemoverLogica(Guid id);
         IEnumerable<NotesObterResponse> ObterTodos();
         NotesObterResponse ObterPorId(Guid id);
-        IEnumerable<NotesObterResponse> ObterPorUsuario(string token);
-        IEnumerable<Notes> ObterPorUsuarioLixeira(string token);
-        IEnumerable<Notes> ObterPorUsuarioArquivado(string token);
+        IEnumerable<NotesObterResponse> ObterPorUsuario(string token, string texto);
+        IEnumerable<Notes> ObterPorUsuarioLixeira(string token, string texto);
+        IEnumerable<Notes> ObterPorUsuarioArquivado(string token, string texto);
         string ArquivarLogica(Guid notaId);
     }
 }

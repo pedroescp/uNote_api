@@ -9,6 +9,7 @@ namespace uNotes.Application.AppService.Interface
         string Atualizar(DocumentoAtualizarRequest documento);
         void Remover(Guid id);
         IEnumerable<DocumentoObterResponse> ObterTodos();
+        IEnumerable<DocumentoObterResponse> ObterPorDescricao(string texto);
         DocumentoObterResponse ObterPorId(Guid id);
     }
 }
