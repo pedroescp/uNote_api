@@ -40,5 +40,11 @@ namespace uNotes.Api.Controllers
             _categoriaAppService.Remover(notaId);
             return CustomResponse();
         }
+
+        [HttpPut("adicionar-usuarios")]
+        public IActionResult AdicionarUsuarios([FromBody] CategoriasAdicionarUsuarioRequest usuarios) => CustomPutResponse(_categoriaAppService.AdicionarUsuarios(usuarios.CategoriaId, usuarios.Usuarios, Request.Headers[HeaderNames.Authorization]));
+
+        [HttpPut("remover-usuarios")]
+        public IActionResult RemoverUsuarios([FromBody] CategoriasAdicionarUsuarioRequest usuarios) => CustomPutResponse(_categoriaAppService.RemoverUsuarios(usuarios.CategoriaId, usuarios.Usuarios, Request.Headers[HeaderNames.Authorization]));
     }
 }

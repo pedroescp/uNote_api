@@ -63,6 +63,50 @@ namespace uNotes.Application.AppService
             return _mapper.Map<IEnumerable<CategoriaObterResponse>>(_categoriaService.ObterTodos());
         }
 
+        public string AdicionarUsuarios(Guid categoriaId, List<Guid> usuarioAdicionarId, string token)
+        {
+            var usuarioId = ObterInformacoesToken(token[7..]);
+            if (usuarioId == null || usuarioId == Guid.Empty)
+            {
+                _notificador.AdicionarNotificacao("Token inválido");
+                return null;
+            }
+            var categoria = _categoriaService.ObterPorId(categoriaId);
+            if (categoria.CriadorId != usuarioId)
+                return "Usuário não é o criador da categoria";
+            usuarioAdicionarId.ForEach(usuario =>
+            {
+                _usuarioCategoriaService.Adicionar(new UsuarioCategoria
+                {
+                    Categoria = categoria,
+                    UsuarioId = usuario
+                });
+            });
+            _unitOfWork.Commit();
+            return $"Usuário(s) adicionado na categoria {categoria.Titulo}";
+        }
+
+        public string RemoverUsuarios(Guid categoriaId, List<Guid> usuarioRemoverIds, string token)
+        {
+            var usuarioId = ObterInformacoesToken(token[7..]);
+            if (usuarioId == null || usuarioId == Guid.Empty)
+            {
+                _notificador.AdicionarNotificacao("Token inválido");
+                return null;
+            }
+            var categoria = _categoriaService.ObterPorId(categoriaId);
+            if (categoria.CriadorId != usuarioId)
+                return "Usuário não é o criador da categoria";
+            usuarioRemoverIds.ForEach(usuario =>
+            {
+                var usuarioRemover = _usuarioCategoriaService.Buscar(x => x.UsuarioId == usuario && x.CategoriaId == categoria.Id).First();
+                if(usuarioRemover != null)
+                    _usuarioCategoriaService.Remover(usuarioRemover.Id);
+            });
+            _unitOfWork.Commit();
+            return $"Usuário(s) removido(s) na categoria {categoria.Titulo}";
+        }
+
         public List<CategoriaObterResponse> ObterCategoriasPorUsuario(string token)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);

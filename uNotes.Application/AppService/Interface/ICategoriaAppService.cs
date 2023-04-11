@@ -11,5 +11,7 @@ namespace uNotes.Application.AppService.Interface
         IEnumerable<CategoriaObterResponse> ObterTodos();
         CategoriaObterResponse ObterPorId(Guid id);
         List<CategoriaObterResponse> ObterCategoriasPorUsuario(string token);
+        string AdicionarUsuarios(Guid categoriaId, List<Guid> usuarioAdicionarId, string token);
+        string RemoverUsuarios(Guid categoriaId, List<Guid> usuarioRemoverIds, string token);
     }
 }
