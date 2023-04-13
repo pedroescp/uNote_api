@@ -12,10 +12,10 @@ namespace uNotes.Domain.Services
             _documentoRepository = repository;
         }
 
-        public void AtualizarDocumento(Documento documento)
+        public async Task AtualizarDocumento(Documento documento)
         {
             var antigoDocumento = _documentoRepository.ObterPorId(documento.Id);
-            antigoDocumento.Atualizar(documento);
+            await antigoDocumento.Atualizar(documento);
             return;
         }
 

@@ -24,7 +24,7 @@ namespace uNotes.Api.Controllers
         public IActionResult Adicionar([FromBody] DocumentoAdicionarRequest notes) => CustomPostResponse(_documentosAppService.Adicionar(notes));
 
         [HttpPut]
-        public IActionResult Atualizar([FromBody] DocumentoAtualizarRequest notes) => CustomPutResponse(_documentosAppService.Atualizar(notes));
+        public async Task<IActionResult> Atualizar([FromBody] DocumentoAtualizarRequest notes) => CustomPutResponse(await _documentosAppService.Atualizar(notes));
 
         [HttpGet("obter-por-id")]
         public IActionResult ObterPorId(Guid id) => CustomPostResponse(_documentosAppService.ObterPorId(id));

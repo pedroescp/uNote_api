@@ -14,7 +14,6 @@ using uNotes.Infra.CrossCutting.AWS;
 using uNotes.Infra.CrossCutting.AWS.Interfaces;
 using uNotes.Infra.CrossCutting.Notificacoes;
 using uNotes.Infra.CrossCutting.UoW;
-using uNotes.Infra.CrossCutting.WebSocketService;
 using uNotes.Infra.Data.Contexto;
 using uNotes.Infra.Data.Repository;
 
@@ -53,7 +52,6 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<IDocumentoService, DocumentoService>();
             services.AddScoped<ITagService, TagService>();
             services.AddScoped<ITagsNotasService, TagsNotasService>();
-            services.AddScoped<IWebSocketCalls, WebSocketCalls>();
             services.AddScoped<IAWSS3Service, AWSS3Service>();
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<INotaDocumentoService, NotaDocumentoService>();
@@ -70,6 +68,7 @@ namespace uNotes.Infra.CrossCutting.IoC
             services.AddScoped<ITagsNotasAppService, TagsNotasAppService>();
             services.AddScoped<ICategoriaAppService, CategoriaAppService>();
             services.AddScoped<INotaDocumentoAppService, NotaDocumentoAppService>();
+            services.AddScoped<IWebSocketAppService, WebSocketAppService>();
             #endregion
 
             services.AddDbContext<uNotesContext>(options => options.UseNpgsql(connectionString, o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));

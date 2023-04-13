@@ -1,8 +1,10 @@
-﻿namespace uNotes.Domain.Entidades
+﻿using System.Runtime.CompilerServices;
+
+namespace uNotes.Domain.Entidades
 {
     public class Documento : EntidadeBase
     {
-        protected Documento()
+        public Documento()
         {
 
         }
@@ -15,7 +17,7 @@
         public virtual Categoria? Categoria { get; set; }
         public virtual List<NotaDocumento> Notas { get; set; }
 
-        public void Atualizar(Documento novoDocumento)
+        public async Task Atualizar(Documento novoDocumento)
         {
             Titulo = novoDocumento.Titulo;
             Texto = novoDocumento.Texto;

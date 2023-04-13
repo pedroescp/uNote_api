@@ -1,12 +1,15 @@
-﻿using Amazon.S3;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.WebSockets;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
 using System.Text;
 using uNotes.Api.Configuration;
 using uNotes.Infra.CrossCutting.Constantes;
 using uNotes.Infra.CrossCutting.IoC;
 using uNotes.Infra.Data.Contexto;
+using WebSocketManager;
 
 namespace uNotes.Api
 {
@@ -56,6 +59,7 @@ namespace uNotes.Api
 
             services.AddCors();
             services.AddSwaggerConfig();
+            services.AddWebSocketManager();
         }
 
         public void Configure(IApplicationBuilder app, ConfiguracoesSeed configSeed, IWebHostEnvironment env)
@@ -109,6 +113,8 @@ namespace uNotes.Api
 
             app.UseRouting();
 
+            app.UseMiddleware<WebSocketMiddleware>();
+
             app.UseAuthentication();
 
             app.UseAuthorization();
@@ -116,6 +122,8 @@ namespace uNotes.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                app.UseWebSockets();
             });
         }
     }

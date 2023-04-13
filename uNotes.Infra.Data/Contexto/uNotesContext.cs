@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson.Serialization;
+using System.Runtime.Serialization;
 using uNotes.Domain.Entidades;
 using uNotes.Infra.Data.Mappings;
 
@@ -45,6 +47,13 @@ namespace uNotes.Infra.Data.Contexto
             }
             catch { throw; }
         }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            return await Task.FromResult(SaveChanges());
+        }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
         }
