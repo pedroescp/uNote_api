@@ -1,6 +1,6 @@
 # uNotes
 
-##Docker
+## Docker
 - Dentro da pasta Docker crie uma pasta chamada "data"
  - Comando: mkdir data
 - Depois crie um arquivo chamado ".env" com as seguintes variáveis:
