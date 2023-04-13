@@ -18,7 +18,7 @@ namespace uNotes.Infra.Data.Repository
                                     && x.CriadorId == usuarioId 
                                     && x.DataExclusao == null 
                                     && (x.Status == StatusNota.Fixado || x.Status == StatusNota.Ativo))
-                        .OrderBy(x => x.DataAtualizacao)
+                        .OrderByDescending(x => x.DataAtualizacao)
                         .ThenBy(x => x.Status);
         }
 
@@ -29,7 +29,7 @@ namespace uNotes.Infra.Data.Repository
                                     && x.CriadorId == usuarioId
                                     && x.DataExclusao == null
                                     && x.Status == StatusNota.Arquivada)
-                        .OrderBy(x => x.DataAtualizacao)
+                        .OrderByDescending(x => x.DataAtualizacao)
                         .ThenBy(x => x.Status);
         }
 
@@ -39,7 +39,7 @@ namespace uNotes.Infra.Data.Repository
                                     || x.Titulo.ToLower().Contains(texto.ToLower()))
                                     && x.CriadorId == usuarioId
                                     && x.Status == StatusNota.Lixeira)
-                        .OrderBy(x => x.DataAtualizacao)
+                        .OrderByDescending(x => x.DataAtualizacao)
                         .ThenBy(x => x.Status);
         }
     }
