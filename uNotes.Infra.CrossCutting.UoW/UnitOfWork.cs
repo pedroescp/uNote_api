@@ -17,6 +17,8 @@ namespace uNotes.Infra.CrossCutting.UoW
         }
 
         public void Commit() => _context.SaveChanges();
+        
+        public async Task CommitAsync() => await _context.SaveChangesAsync();
 
         public void Dispose()
         {

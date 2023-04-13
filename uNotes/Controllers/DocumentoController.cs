@@ -17,16 +17,20 @@ namespace uNotes.Api.Controllers
             _documentosAppService = documentosAppService;
         }
 
+        [HttpGet("obter-por-texto")]
+        public IActionResult ObterPorDescricao(string texto) => CustomPostResponse(_documentosAppService.ObterPorDescricao(texto));
+
         [HttpPost]
         public IActionResult Adicionar([FromBody] DocumentoAdicionarRequest notes) => CustomPostResponse(_documentosAppService.Adicionar(notes));
 
         [HttpPut]
-        public IActionResult Atualizar([FromBody] DocumentoAtualizarRequest notes) => CustomPutResponse(_documentosAppService.Atualizar(notes));
+        public async Task<IActionResult> Atualizar([FromBody] DocumentoAtualizarRequest notes) => CustomPutResponse(await _documentosAppService.Atualizar(notes));
 
         [HttpGet("obter-por-id")]
         public IActionResult ObterPorId(Guid id) => CustomPostResponse(_documentosAppService.ObterPorId(id));
 
         [HttpGet]
         public IActionResult ObterTodos() => CustomPostResponse(_documentosAppService.ObterTodos());
+
     }
 }

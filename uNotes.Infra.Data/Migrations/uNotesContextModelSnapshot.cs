@@ -47,7 +47,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cargos");
+                    b.ToTable("Cargos", (string)null);
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Categoria", b =>
@@ -56,8 +56,11 @@ namespace uNotes.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("CategoriaPai")
-                        .HasColumnType("integer");
+                    b.Property<Guid?>("CategoriaPai")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CriadorId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("timestamp without time zone");
@@ -74,7 +77,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias");
+                    b.ToTable("Categorias", (string)null);
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Colaboradores", b =>
@@ -110,7 +113,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colaboradores");
+                    b.ToTable("Colaboradores", (string)null);
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Documento", b =>
@@ -151,34 +154,10 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasIndex("CategoriaId");
 
-                    b.ToTable("Documentos");
+                    b.ToTable("Documentos", (string)null);
                 });
 
-            modelBuilder.Entity("uNotes.Domain.Entidades.Grupo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("DataInclusao")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Grupos");
-                });
-
-            modelBuilder.Entity("uNotes.Domain.Entidades.Notes", b =>
+            modelBuilder.Entity("uNotes.Domain.Entidades.NotaDocumento", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -215,7 +194,46 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Notes");
+                    b.HasIndex("DocumentoId");
+
+                    b.ToTable("NotasDocumento", (string)null);
+                });
+
+            modelBuilder.Entity("uNotes.Domain.Entidades.Notes", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CriadorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime?>("DataExclusao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DataInclusao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Texto")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UsuarioAtualizacaoId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notes", (string)null);
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Tag", b =>
@@ -233,7 +251,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tags", (string)null);
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.TagsNotas", b =>
@@ -250,7 +268,7 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TagsNotas");
+                    b.ToTable("TagsNotas", (string)null);
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Usuario", b =>
@@ -303,22 +321,13 @@ namespace uNotes.Infra.Data.Migrations
                     b.ToTable("Usuario", (string)null);
                 });
 
-            modelBuilder.Entity("uNotes.Domain.Entidades.UsuarioGrupo", b =>
+            modelBuilder.Entity("uNotes.Domain.Entidades.UsuarioCategoria", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("DataInclusao")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<Guid>("GrupoId")
+                    b.Property<Guid>("CategoriaId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("UsuarioId")
@@ -326,11 +335,11 @@ namespace uNotes.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GrupoId");
+                    b.HasIndex("CategoriaId");
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("UsuariosGrupos");
+                    b.ToTable("UsuariosCategorias", (string)null);
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Documento", b =>
@@ -342,6 +351,15 @@ namespace uNotes.Infra.Data.Migrations
                     b.Navigation("Categoria");
                 });
 
+            modelBuilder.Entity("uNotes.Domain.Entidades.NotaDocumento", b =>
+                {
+                    b.HasOne("uNotes.Domain.Entidades.Documento", "Documento")
+                        .WithMany("Notas")
+                        .HasForeignKey("DocumentoId");
+
+                    b.Navigation("Documento");
+                });
+
             modelBuilder.Entity("uNotes.Domain.Entidades.Usuario", b =>
                 {
                     b.HasOne("uNotes.Domain.Entidades.Cargo", "Cargo")
@@ -351,21 +369,21 @@ namespace uNotes.Infra.Data.Migrations
                     b.Navigation("Cargo");
                 });
 
-            modelBuilder.Entity("uNotes.Domain.Entidades.UsuarioGrupo", b =>
+            modelBuilder.Entity("uNotes.Domain.Entidades.UsuarioCategoria", b =>
                 {
-                    b.HasOne("uNotes.Domain.Entidades.Grupo", "Grupo")
-                        .WithMany("Vinculos")
-                        .HasForeignKey("GrupoId")
+                    b.HasOne("uNotes.Domain.Entidades.Categoria", "Categoria")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("uNotes.Domain.Entidades.Usuario", "Usuario")
-                        .WithMany("Grupos")
+                        .WithMany("Categorias")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Grupo");
+                    b.Navigation("Categoria");
 
                     b.Navigation("Usuario");
                 });
@@ -373,16 +391,18 @@ namespace uNotes.Infra.Data.Migrations
             modelBuilder.Entity("uNotes.Domain.Entidades.Categoria", b =>
                 {
                     b.Navigation("Documentos");
+
+                    b.Navigation("Usuarios");
                 });
 
-            modelBuilder.Entity("uNotes.Domain.Entidades.Grupo", b =>
+            modelBuilder.Entity("uNotes.Domain.Entidades.Documento", b =>
                 {
-                    b.Navigation("Vinculos");
+                    b.Navigation("Notas");
                 });
 
             modelBuilder.Entity("uNotes.Domain.Entidades.Usuario", b =>
                 {
-                    b.Navigation("Grupos");
+                    b.Navigation("Categorias");
                 });
 #pragma warning restore 612, 618
         }

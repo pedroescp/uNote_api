@@ -20,6 +20,10 @@ namespace uNotes.Infra.Data.Mappings
             builder.Property(x => x.CargoId).IsRequired(false);
             builder.Property(x => x.Telefone).IsRequired(false);
             builder.Property(x => x.UsuarioPaiId);
+
+            builder.HasMany(x => x.Categorias)
+                .WithOne(x => x.Usuario)
+                .HasForeignKey(x => x.UsuarioId);
         }
     }
 }

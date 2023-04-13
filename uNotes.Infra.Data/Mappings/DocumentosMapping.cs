@@ -17,6 +17,10 @@ namespace uNotes.Infra.Data.Mappings
             builder.Property(x => x.Texto).IsRequired(false);
             builder.Property(x => x.UsuarioAtualizacaoId).IsRequired(false);
             builder.Property(x => x.CategoriaId).IsRequired(false);
+
+            builder.HasMany(x => x.Notas)
+                .WithOne(x => x.Documento)
+                .HasForeignKey(x => x.DocumentoId);
         }
     }
 }

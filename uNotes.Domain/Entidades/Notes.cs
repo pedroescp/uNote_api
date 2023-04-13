@@ -9,7 +9,6 @@ namespace uNotes.Domain.Entidades
         public Guid CriadorId { get; set; }
         public StatusNota Status { get; set; }
         public Guid UsuarioAtualizacaoId { get; set; }
-        public Guid? DocumentoId { get; set; }
 
         public void Atualizar(Notes novoNotes)
         {

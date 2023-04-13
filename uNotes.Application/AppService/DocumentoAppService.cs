@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using MongoDB.Bson;
+using System.Collections.Generic;
 using uNotes.Application.AppService.Interface;
 using uNotes.Application.Requests.Colaboradores;
 using uNotes.Application.Requests.Documentos;
@@ -30,10 +32,10 @@ namespace uNotes.Application.AppService
             return user;
         }
 
-        public string Atualizar(DocumentoAtualizarRequest user)
+        public async Task<string> Atualizar(DocumentoAtualizarRequest user)
         {
-            _documentoService.AtualizarDocumento(_mapper.Map<Documento>(user));
-            _unitOfWork.Commit();
+            await _documentoService.AtualizarDocumento(_mapper.Map<Documento>(user));
+            await _unitOfWork.CommitAsync();
             return "Notes Atualizado com Sucesso";
         }
         public DocumentoObterResponse ObterPorId(Guid id)
@@ -49,6 +51,11 @@ namespace uNotes.Application.AppService
         {
             _documentoService.Remover(id);
             _unitOfWork.Commit();
+        }
+
+        public IEnumerable<DocumentoObterResponse> ObterPorDescricao(string texto)
+        {
+            return _mapper.Map<IEnumerable<DocumentoObterResponse>>(_documentoService.ObterPorDescricao(texto));
         }
     }
 }

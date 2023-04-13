@@ -65,7 +65,7 @@ namespace uNotes.Application.AppService
             return _mapper.Map<IEnumerable<NotesObterResponse>>(_notesService.ObterTodos());
         }
 
-        public IEnumerable<NotesObterResponse> ObterPorUsuario(string token)
+        public IEnumerable<NotesObterResponse> ObterPorUsuario(string token, string texto)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);
             if (usuarioId == null || usuarioId == Guid.Empty)
@@ -73,7 +73,7 @@ namespace uNotes.Application.AppService
                 _notificador.AdicionarNotificacao("Token inválido");
                 return null;
             }
-            return _mapper.Map<IEnumerable<NotesObterResponse>>(_notesService.ObterPorUsuario(usuarioId));
+            return _mapper.Map<IEnumerable<NotesObterResponse>>(_notesService.ObterPorUsuario(usuarioId, texto));
         }
 
         public string RemoverLogica(Guid id)
@@ -83,7 +83,7 @@ namespace uNotes.Application.AppService
             return removerMensagem;
         }
 
-        public IEnumerable<Notes> ObterPorUsuarioLixeira(string token)
+        public IEnumerable<Notes> ObterPorUsuarioLixeira(string token, string texto)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);
             if (usuarioId == null || usuarioId == Guid.Empty)
@@ -91,10 +91,10 @@ namespace uNotes.Application.AppService
                 _notificador.AdicionarNotificacao("Token inválido");
                 return null;
             }
-            return _notesService.ObterPorUsuarioLixeira(usuarioId);
+            return _notesService.ObterPorUsuarioLixeira(usuarioId, texto);
         }
 
-        public IEnumerable<Notes> ObterPorUsuarioArquivado(string token)
+        public IEnumerable<Notes> ObterPorUsuarioArquivado(string token, string texto)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);
             if (usuarioId == null || usuarioId == Guid.Empty)
@@ -102,7 +102,7 @@ namespace uNotes.Application.AppService
                 _notificador.AdicionarNotificacao("Token inválido");
                 return null;
             }
-            return _notesService.ObterPorUsuarioArquivado(usuarioId);
+            return _notesService.ObterPorUsuarioArquivado(usuarioId, texto);
         }
 
         public string ArquivarLogica(Guid notaId)
