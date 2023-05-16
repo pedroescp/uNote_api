@@ -118,7 +118,7 @@ namespace uNotes.Application.AppService
             return _mapper.Map<IEnumerable<UsuarioObterResponse>>(_usuarioService.ObterTodos());
         }
 
-        public async Task<string> AdicionarAvatar(IFormFile arquivo, string token)
+        public async Task<string> AdicionarAvatar(string arquivo, string token)
         {
             var usuarioId = ObterInformacoesToken(token[7..]);
             if (usuarioId == null || usuarioId == Guid.Empty)
@@ -129,13 +129,7 @@ namespace uNotes.Application.AppService
             await RemoverAvatar(usuarioId);
             if (_notificador.TemNotificacao())
                 return null;
-            var result = await _AWSS3Service.UploadArquivo(arquivo);
-            if(result == null)
-            {
-                _notificador.AdicionarNotificacao("Falha ao salvar imagem");
-                return null;
-            }
-            _usuarioService.AdicionarAvatar(Guid.Parse(result.Id), usuarioId);
+            _usuarioService.AdicionarAvatar(arquivo, usuarioId);
             if (_notificador.TemNotificacao())
                 return null;
             _unitOfWork.Commit();
@@ -150,14 +144,8 @@ namespace uNotes.Application.AppService
                 _notificador.AdicionarNotificacao("Usuário não encontrado");
                 return;
             }
-            if (!usuario.Avatar.HasValue)
+            if (usuario.Avatar == null)
             {
-                return;
-            }
-            var result = await _AWSS3Service.ExcluirArquivo(usuario.Avatar.Value);
-            if (result == false)
-            {
-                _notificador.AdicionarNotificacao("Falha ao excluir arquivo");
                 return;
             }
             _usuarioService.RemoverAvatar(usuarioId);

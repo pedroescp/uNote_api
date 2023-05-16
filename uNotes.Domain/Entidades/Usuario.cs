@@ -8,7 +8,7 @@
         public string Senha { get; set; }
         public string Telefone { get; set; }
         public Guid? CargoId { get; set; }
-        public Guid? Avatar { get; set; }
+        public string? Avatar { get; set; }
         public Guid UsuarioPaiId { get; set; }
         public List<UsuarioCategoria>? Categorias { get; set; }
 
@@ -24,7 +24,7 @@
             CargoId = novoUsuario.CargoId;
         }
 
-        public void AdicionarAvatar(Guid avatarId)
+        public void AdicionarAvatar(string avatarId)
         {
             Avatar = avatarId;
         }

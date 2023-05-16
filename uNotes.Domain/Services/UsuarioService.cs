@@ -35,7 +35,7 @@ namespace uNotes.Domain.Services
             return _usuarioRepository.ObterPorEmailOuLogin(login);
         }
 
-        public void AdicionarAvatar(Guid avatarId, Guid usuarioId)
+        public void AdicionarAvatar(string avatarId, Guid usuarioId)
         {
             var usuario = _usuarioRepository.ObterPorId(usuarioId);
             if(usuario == null)

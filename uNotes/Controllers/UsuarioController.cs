@@ -26,7 +26,7 @@ namespace uNotes.Api
 
         [HttpPost]
         [Route("adicionar-avatar")]
-        public async Task<IActionResult> AdicionarAvatar([FromForm] UsuarioAdicionarAvatarRequest objeto) => CustomResponse(await _usuarioAppService.AdicionarAvatar(objeto.Arquivo, Request.Headers[HeaderNames.Authorization]));
+        public async Task<IActionResult> AdicionarAvatar(UsuarioAdicionarAvatarRequest objeto) => CustomResponse(await _usuarioAppService.AdicionarAvatar(objeto.Arquivo, Request.Headers[HeaderNames.Authorization]));
 
         [HttpPut]
         public IActionResult Atualizar([FromBody] UsuarioAtualizarRequest usuario) => CustomPutResponse(_usuarioAppService.Atualizar(usuario));

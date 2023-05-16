@@ -9,7 +9,7 @@ namespace uNotes.Application.Requests.Usuario
 {
     public class UsuarioAdicionarAvatarRequest
     {
-        public IFormFile Arquivo { get; set; }
+        public string Arquivo { get; set; }
         public Guid UsuarioId { get; set; }
     }
 }
