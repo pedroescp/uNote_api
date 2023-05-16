@@ -32,5 +32,11 @@ namespace uNotes.Api.Controllers
         [HttpGet]
         public IActionResult ObterTodos() => CustomPostResponse(_documentosAppService.ObterTodos());
 
+        [HttpDelete]
+        public IActionResult RemoverDocumento(Guid id)
+        {
+            _documentosAppService.Remover(id);
+            return CustomDeleteResponse("Documento removido com sucesso");
+        }
     }
 }

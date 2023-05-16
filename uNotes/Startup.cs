@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.WebSockets;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Minio;
 using MongoDB.Driver;
 using System.Text;
 using uNotes.Api.Configuration;
@@ -25,6 +26,12 @@ namespace uNotes.Api
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             services.RegisterServices(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddSingleton(provider =>
+                    new MinioClient()
+                                .WithEndpoint(Configuration.GetSection("Minio").GetValue<string>("ENDPOINT"))
+                                .WithCredentials(Configuration.GetSection("Minio").GetValue<string>("ACCESS_KEY"), 
+                                                 Configuration.GetSection("Minio").GetValue<string>("SECRET_KEY"))
+                    .Build());
             services.AddControllers();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
