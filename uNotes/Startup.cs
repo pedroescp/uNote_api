@@ -69,8 +69,8 @@ namespace uNotes.Api
                 configSeed.SeedData().Wait();
             }
             catch (Exception)
-            {
-
+        {
+            
                 throw;
             }
             
